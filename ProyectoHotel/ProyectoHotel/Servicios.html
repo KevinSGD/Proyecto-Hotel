@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Key Offerings</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            width: 100%;
+            padding: 50px 0;
+        }
+
+        .grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .lg-grid-cols-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .xl-grid-cols-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        .lg-grid-cols-1fr-500px {
+            grid-template-columns: 1fr 500px;
+        }
+
+        .xl-grid-cols-1fr-550px {
+            grid-template-columns: 1fr 550px;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .rounded-lg {
+            border-radius: 10px;
+        }
+
+        .border {
+            border: 1px solid #ddd;
+        }
+
+        .bg-background {
+            background-color: white;
+        }
+
+        .p-6 {
+            padding: 24px;
+        }
+
+        .shadow-sm {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hover-border-primary:hover {
+            border-color: #007bff;
+        }
+
+        .hover-shadow-md:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .text-3xl {
+            font-size: 1.875rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .text-muted-foreground {
+            color: #6c757d;
+        }
+
+        .max-w-600 {
+            max-width: 600px;
+        }
+
+        .rounded-md {
+            border-radius: 4px;
+        }
+
+        .aspect-square {
+            aspect-ratio: 1 / 1;
+        }
+
+        .object-cover {
+            object-fit: cover;
+        }
+
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+        .space-y-2 > * + * {
+            margin-top: 8px;
+        }
+
+        .space-y-4 > * + * {
+            margin-top: 16px;
+        }
+
+        .gap-4 > * + * {
+            margin-top: 16px;
+        }
+
+        .mx-auto {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .offerings-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: #000;
+        }
+
+        .offerings-description {
+            font-size: 1.25rem;
+            color: #6c757d;
+        }
+
+        .offerings-card {
+            padding: 24px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .offerings-card:hover {
+            border-color: #007bff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .offerings-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .offerings-card-description {
+            color: #6c757d;
+        }
+
+        .icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* SVG Icon Styles */
+        .icon {
+            width: 24px;
+            height: 24px;
+            stroke: #6c757d;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+    </style>
+</head>
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="grid lg-grid-cols-1fr-500px xl-grid-cols-1fr-550px gap-12">
+                <div class="flex flex-col justify-center space-y-4">
+                    <div class="space-y-2">
+                        <h1 class="offerings-title">Nuestros Servicios</h1>
+                        <p class="offerings-description max-w-600">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minima laborum tenetur, mollitia animi aut iusto? Facere distinctio non facilis mollitia, dignissimos quidem hic fuga laudantium voluptate rerum? Officia, cumque quod.
+                        </p>
+                    </div>
+                </div>
+                <img
+                    src="Imagenes/Servicios.jpeg"
+                    width="550"
+                    height="550"
+                    alt="Services"
+                    class="mx-auto aspect-square overflow-hidden rounded-lg object-cover"
+                />
+            </div>
+        </div>
+    </section>
+    <section class="section">
+        <div class="container grid lg-grid-cols-2 xl-grid-cols-3 gap-6">
+            <div class="offerings-card">
+                <div class="icon-container">
+                    <!-- Bolt Icon -->
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+                        <circle cx="12" cy="12" r="4" />
+                    </svg>
+                </div>
+                <h3 class="offerings-card-title">Servicio 1</h3>
+                <p class="offerings-card-description">
+                   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos voluptates error modi fuga fugiat animi totam hic dolores excepturi exercitationem numquam vel in sapiente, inventore tempore. Nesciunt illo reiciendis rerum.
+                </p>
+            </div>
+
+            <div class="offerings-card">
+                <div class="icon-container">
+                    <!-- Brush Icon -->
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08" />
+                        <path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z" />
+                    </svg>
+                </div>
+                <h3 class="offerings-card-title">Servicio 2</h3>
+                <p class="offerings-card-description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda iure fugit culpa doloribus eum earum a eveniet? Sapiente sit ipsum quos aperiam voluptas cumque placeat laudantium voluptatibus ratione. Dolores, error!
+                </p>
+            </div>
+
+            <div class="offerings-card">
+                <div class="icon-container">
+                    <!-- Cloud Icon -->
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                    </svg>
+                </div>
+                <h3 class="offerings-card-title">Servicio 3</h3>
+                <p class="offerings-card-description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum iste ex ad fugiat ipsam a totam. Facilis suscipit, ipsum recusandae voluptatibus commodi illo consectetur, atque illum repellendus cupiditate sunt reiciendis?
+                </p>
+            </div>
+
+            <div class="offerings-card">
+                <div class="icon-container">
+                    <!-- Cloud Icon -->
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                    </svg>
+                </div>
+                <h3 class="offerings-card-title">Servicio 3</h3>
+                <p class="offerings-card-description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat quis, laborum voluptate quo porro recusandae quos eum est nam, quae saepe molestiae sit architecto optio? Nisi deleniti aut enim eos!
+                </p>
+            </div>
+
+            <div class="offerings-card">
+                <div class="icon-container">
+                    <!-- Database Icon -->
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <ellipse cx="12" cy="5" rx="9" ry="3" />
+                        <path d="M3 5V19A9 3 0 0 0 21 19V5" />
+                        <path d="M3 12A9 3 0 0 0 21 12" />
+                    </svg>
+                </div>
+                <h3 class="offerings-card-title">Servicio 4</h3>
+                <p class="offerings-card-description">
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Id nisi, iste saepe, enim nostrum, deleniti tempora praesentium assumenda et corrupti in. Quasi, alias velit. Pariatur amet eius neque aliquid ratione.
+                </p>
+            </div>
+
+            <div class="offerings-card">
+                <div class="icon-container">
+                    <!-- Shield Icon -->
+                    <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+                    </svg>
+                </div>
+                <h3 class="offerings-card-title">Servicio 5</h3>
+                <p class="offerings-card-description">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis nulla quaerat similique ipsa assumenda reiciendis, et, nemo corporis cum fuga non consequatur officiis, vero repellat dolore! Sequi animi sunt quos?
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
