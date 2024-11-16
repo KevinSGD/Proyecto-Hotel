@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Empleados - Supervisor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 600px;
+      padding: 20px;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    .table th, .table td {
+      padding: 10px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .table th {
+      background-color: #f1f1f1;
+    }
+
+    /* From Uiverse.io by niat786 */
+    button {
+      border: none;
+      color: #fff;
+      background-image: linear-gradient(30deg, #901a00, #d35445);
+      border-radius: 20px;
+      background-size: 100% auto;
+      font-family: inherit;
+      font-size: 17px;
+      padding: 0.6em 1.5em;
+      cursor: pointer;
+      transition: background-position 0.3s, background-size 0.3s;
+    }
+
+    button:hover {
+      background-position: right center;
+      background-size: 200% auto;
+      animation: pulse512 1.5s infinite;
+    }
+
+    @keyframes pulse512 {
+      0% {
+        box-shadow: 0 0 0 0 #901a0066;
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(144, 26, 0, 0%);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(144, 26, 0, 0%);
+      }
+    }
+
+    .input {
+      width: 100%;
+      padding: 5px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="card-header">
+      <h2>Gestión de Empleados - Supervisor</h2>
+      <button onclick="logout()">Cerrar Sesión</button>
+    </div>
+    <div class="card-content">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Posición</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="employee-table-body">
+          <!-- Las filas se generarán dinámicamente con JS -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      window.location.href = 'Cargos.html'; // Redirección a la interfaz de Cargos.html
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const employees = [
+        { id: 1, name: "Juan Pérez", position: "Desarrollador" },
+        { id: 2, name: "Ana López", position: "Diseñadora" },
+        { id: 3, name: "Carlos Gómez", position: "Gerente" }
+      ];
+
+      const tableBody = document.getElementById("employee-table-body");
+      let editingId = null;
+
+      function renderTable() {
+        tableBody.innerHTML = "";
+        employees.forEach(employee => {
+          const row = document.createElement("tr");
+          row.classList.add("fade-in");
+
+          row.innerHTML = `
+            <td>${employee.id}</td>
+            <td>${editingId === employee.id ? `<input class="input" type="text" value="${employee.name}" data-field="name">` : employee.name}</td>
+            <td>${editingId === employee.id ? `<input class="input" type="text" value="${employee.position}" data-field="position">` : employee.position}</td>
+            <td>
+              ${editingId === employee.id 
+                ? `<button class="button" data-action="save">Guardar</button>` 
+                : `<button class="button" data-action="edit">Editar</button>`}
+            </td>
+          `;
+
+          row.querySelector('[data-action="edit"]')?.addEventListener("click", () => handleEdit(employee.id));
+          row.querySelector('[data-action="save"]')?.addEventListener("click", () => handleSave(employee.id));
+          
+          const inputs = row.querySelectorAll("input");
+          inputs.forEach(input => input.addEventListener("input", (e) => handleInputChange(e, employee)));
+
+          tableBody.appendChild(row);
+        });
+      }
+
+      function handleEdit(id) {
+        editingId = id;
+        renderTable();
+      }
+
+      function handleSave(id) {
+        const employee = employees.find(emp => emp.id === id);
+        Object.assign(employee, employees.find(e => e.id === editingId));
+        editingId = null;
+        renderTable();
+      }
+
+      function handleInputChange(event, employee) {
+        const { value, dataset } = event.target;
+        employee[dataset.field] = value;
+      }
+
+      renderTable();
+    });
+  </script>
+</body>
+</html>

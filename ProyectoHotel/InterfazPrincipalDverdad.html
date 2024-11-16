@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Marriott</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: url('Imagenes/InicioBogotaPrin.jpg') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        .hero .content {
+            z-index: 2;
+        }
+
+        /* Estilo del botón de reserva */
+        .button2 {
+            display: inline-block;
+            -webkit-transition: all 0.2s ease-in;
+            transition: all 0.2s ease-in;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            color: #090909;
+            padding: 0.7em 1.7em;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 0.5em;
+            background: #e8e8e8;
+            border: 1px solid #e8e8e8;
+            -webkit-box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+            box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+        }
+
+        .button2:active {
+            color: #666;
+            -webkit-box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+            box-shadow: inset 4px 4px 12px #c5c5c5, inset -4px -4px 12px #ffffff;
+        }
+
+        .button2:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            -webkit-transform: translateX(-50%) scaleY(1) scaleX(1.25);
+            -ms-transform: translateX(-50%) scaleY(1) scaleX(1.25);
+            transform: translateX(-50%) scaleY(1) scaleX(1.25);
+            top: 100%;
+            width: 140%;
+            height: 180%;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            display: block;
+            -webkit-transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+            transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+            z-index: -1;
+        }
+
+        .button2:after {
+            content: "";
+            position: absolute;
+            left: 55%;
+            -webkit-transform: translateX(-50%) scaleY(1) scaleX(1.45);
+            -ms-transform: translateX(-50%) scaleY(1) scaleX(1.45);
+            transform: translateX(-50%) scaleY(1) scaleX(1.45);
+            top: 180%;
+            width: 160%;
+            height: 190%;
+            background-color: #901a00; /* Cambié el color aquí */
+            border-radius: 50%;
+            display: block;
+            -webkit-transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+            transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
+            z-index: -1;
+        }
+
+        .button2:hover {
+            color: #ffffff;
+            border: 1px solid #901a00; /* Cambié el color aquí */
+        }
+
+        .button2:hover:before {
+            top: -35%;
+            background-color: #901a00; /* Cambié el color aquí */
+            -webkit-transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+            -ms-transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+            transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+        }
+
+        .button2:hover:after {
+            top: -45%;
+            background-color: #901a00; /* Cambié el color aquí */
+            -webkit-transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+            -ms-transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+            transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+        }
+
+        /* Secciones */
+        .section {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .section h2 {
+            margin-bottom: 30px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            width: 190px;
+            height: 254px;
+            border-radius: 43px;
+            background: #ffffff; /* Cambié el color de fondo a blanco */
+            box-shadow: 15px 15px 30px #bebebe, -15px -15px 30px #ffffff; /* Sombras suaves */
+            padding: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            text-align: left;
+        }
+
+        .card:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .card img {
+            width: 100%;
+        }
+
+        .card h3 {
+            margin: 0;
+            padding: 15px;
+            font-size: 18px;
+        }
+
+        .card p {
+            padding: 0 15px 15px;
+            font-size: 14px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+
+        .modal img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .modal h3 {
+            margin: 10px 0;
+        }
+
+        .modal p {
+            margin-bottom: 20px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px; 
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function openModal(title, imgSrc, description) {
+            const modal = document.getElementById('modal');
+            modal.querySelector('h3').innerText = title;
+            modal.querySelector('img').src = imgSrc;
+            modal.querySelector('p').innerText = description;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('modal').addEventListener('click', (e) => {
+                if (e.target.classList.contains('modal')) closeModal();
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="overlay"></div>
+        <div class="content">
+            <h1>Bienvenidos al Hotel Marriott</h1>
+            <p>Disfruta de una experiencia única en el mejor destino turístico</p>
+            <a href="InicioSesion.php" class="button2">Reserva Ahora</a>
+        </div>
+    </header>
+
+    <!-- Servicios -->
+    <section class="section" id="servicios">
+        <h2>Servicios</h2>
+        <div class="card-container">
+            <div class="card" onclick="openModal('Spa', 'spa.jpg', 'Relájate en nuestro exclusivo spa con masajes y tratamientos rejuvenecedores.')">
+                <img src="spa.jpg" alt="Spa">
+                <h3>Spa</h3>
+                <p>Relájate con masajes y tratamientos rejuvenecedores.</p>
+            </div>
+            <div class="card" onclick="openModal('Gimnasio', 'gimnasio.jpg', 'Mantén tu rutina en nuestro gimnasio de última tecnología.')">
+                <img src="gimnasio.jpg" alt="Gimnasio">
+                <h3>Gimnasio</h3>
+                <p>Entrena con máquinas de última tecnología.</p>
+            </div>
+            <div class="card" onclick="openModal('Restaurante', 'restaurante.jpg', 'Disfruta de una variedad de platillos gourmet en nuestro restaurante de alta cocina.')">
+                <img src="restaurante.jpg" alt="Restaurante">
+                <h3>Restaurante</h3>
+                <p>Platillos gourmet preparados por chefs internacionales.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinos -->
+    <section class="section" id="destinos">
+        <h2>Destinos</h2>
+        <div class="card-container">
+            <div class="card" onclick="openModal('Playa', 'playa.jpg', 'Disfruta de las mejores playas cerca del hotel, con aguas cristalinas y arena blanca.')">
+                <img src="Imagenes/Playas.jpeg" alt="Playa">
+                <h3>Playa</h3>
+                <p>Relájate en las hermosas playas cercanas.</p>
+            </div>
+            <div class="card" onclick="openModal('Montaña', 'montana.jpg', 'Vive la aventura en las montañas cercanas al hotel.')">
+                <img src="Imagenes/Montañas.jpeg" alt="Montaña">
+                <h3>Montaña</h3>
+                <p>Aventuras al aire libre en la naturaleza.</p>
+            </div>
+            <div class="card" onclick="openModal('Centro Comercial', 'centro_comercial.jpg', 'Compra en los mejores centros comerciales cercanos al hotel.')">
+                <img src="centro_comercial.jpg" alt="Centro Comercial">
+                <h3>Centro Comercial</h3>
+                <p>Las mejores marcas y tiendas al alcance de tu mano.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal()">X</button>
+            <h3></h3>
+            <img src="" alt="">
+            <p></p>
+        </div>
+    </div>
+
+  <!-- Footer -->
+<footer class="footer">
+    <p>© 2024 Hotel Marriott. Todos los derechos reservados.</p>
+    <div class="social-links">
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+    </div>
+    <!-- Enlace para empleados -->
+    <div class="social-links">
+        <a href="InicioSesionEmpleados.html">Empleados</a>
+    </div>
+</footer>
+
+
+</body>
+</html>

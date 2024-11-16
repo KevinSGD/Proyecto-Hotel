@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Marriott - Selección de Habitaciones</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .room-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .room {
+            border: 1px solid #e1e1e1;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            overflow: hidden;
+            display: flex;
+        }
+        .room-image img {
+            width: 100%;
+            height: auto;
+        }
+        .room-details {
+            padding: 15px;
+            flex: 1;
+        }
+        .reserve-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .reserve-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Nuestras Habitaciones</h1>
+
+        <ul class="room-list">
+            <li class="room room-card" data-room-id="1">
+                <div class="room-image">
+                    <img src="imagenes/Sencilla.jpg" alt="Habitación Doble">
+                </div>
+                <div class="room-details">
+                    <h2 class="room-name">Habitación Doble</h2>
+                    <p class="room-description">Perfecta para viajeros individuales o parejas. Cama doble, baño privado, TV, Wi-Fi gratuito.</p>
+                    <p class="room-price">Desde 100$ por noche</p>
+                    <button class="reserve-button" onclick="selectRoom('Habitación Doble')">Seleccionar</button>
+                </div>
+            </li>
+            <li class="room room-card" data-room-id="2">
+                <div class="room-image">
+                    <img src="imagenes/DobleDeluxe.jpg" alt="Habitación Doble Deluxe">
+                </div>
+                <div class="room-details">
+                    <h2 class="room-name">Habitación Doble Deluxe</h2>
+                    <p class="room-description">Espaciosa suite con vistas panorámicas. Cama king-size, sala de estar, jacuzzi, minibar, Wi-Fi gratuito.</p>
+                    <p class="room-price">Desde 180$ por noche</p>
+                    <button class="reserve-button" onclick="selectRoom('Habitación Doble Deluxe')">Seleccionar</button>
+                </div>
+            </li>
+            <li class="room room-card" data-room-id="3">
+                <div class="room-image">
+                    <img src="imagenes/Suite1.jpg" alt="Suite Deluxe">
+                </div>
+                <div class="room-details">
+                    <h2 class="room-name">Suite Deluxe</h2>
+                    <p class="room-description">Ideal para familias o grupos pequeños. Dos camas dobles, área de juegos para niños, TV, Wi-Fi gratuito.</p>
+                    <p class="room-price">Desde 250$ por noche</p>
+                    <button class="reserve-button" onclick="selectRoom('Suite Deluxe')">Seleccionar</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        function selectRoom(roomType) {
+            // Redirigir al formulario de reserva con el tipo de habitación
+            window.location.href = `FormularioReserva.html?tipo-habitacion=${encodeURIComponent(roomType)}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selecciona los servicios del hotel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f7f7f7;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-header .card-title {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .card-header .card-title .icon {
+      margin-right: 10px;
+    }
+
+    .card-description {
+      margin-top: 5px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .card-content .card-image {
+      width: 100%;
+      border-radius: 8px;
+      margin: 10px 0;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+    }
+
+    .checkbox {
+      margin-right: 10px;
+    }
+
+    .button-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    /* Estilos para botones */
+    button {
+      border: none;
+      color: #fff;
+      background-image: linear-gradient(30deg, #901a00, #901a00);
+      border-radius: 20px;
+      background-size: 100% auto;
+      font-family: inherit;
+      font-size: 17px;
+      padding: 0.6em 1.5em;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+    }
+
+    button:hover {
+      background-position: right center;
+      background-size: 200% auto;
+      -webkit-animation: pulse 2s infinite;
+      animation: pulse512 1.5s infinite;
+    }
+
+    @keyframes pulse512 {
+      0% {
+        box-shadow: 0 0 0 0 #901a00;
+      }
+
+      70% {
+        box-shadow: 0 0 0 10px rgba(144, 26, 0, 0.5);
+      }
+
+      100% {
+        box-shadow: 0 0 0 0 rgba(144, 26, 0, 0.5);
+      }
+    }
+
+    .centered-card {
+      justify-self: center;
+    }
+
+    /* Estilos para el modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-header {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .modal-body {
+      margin-bottom: 20px;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #901a00;
+      text-decoration: none;
+    }
+
+    .service-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .service-list li {
+      margin-bottom: 10px;
+    }
+
+    .total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 20px;
+    }
+
+    .confirmation-button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .cancel-button {
+      padding: 10px 20px;
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .payment-method-container {
+      margin-top: 20px;
+    }
+
+    .payment-method-container select,
+    .payment-method-container input {
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+
+    .payment-method-container .payment-description {
+      margin-top: 10px;
+      font-size: 1rem;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="title">Selecciona los servicios del hotel</h1>
+    <div class="grid">
+      <!-- Servicio a la habitación -->
+      <div class="card" data-id="room-service" data-price="30">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🍽️</span>
+            Servicio a la habitación
+          </div>
+          <p class="card-description">
+            Disfruta de comidas y bebidas en la comodidad de tu habitación.
+          </p>
+        </div>
+        <div class="card-content">
+          <img src="Imagenes/ServicioHabitacion.jpg" alt="Servicio a la habitación" class="card-image">
+        </div>
+        <div class="card-footer">
+          <input type="checkbox" id="room-service" class="checkbox">
+          <label for="room-service" class="checkbox-label">Seleccionar este servicio</label>
+        </div>
+      </div>
+
+      <!-- Gimnasio -->
+      <div class="card" data-id="gym" data-price="15">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🏋️‍♂️</span>
+            Gimnasio
+          </div>
+          <p class="card-description">
+            Mantén tu rutina de ejercicios en nuestro gimnasio completamente equipado.
+          </p>
+        </div>
+        <div class="card-content">
+          <img src="Imagenes/Gym.jpg" alt="Gimnasio" class="card-image">
+        </div>
+        <div class="card-footer">
+          <input type="checkbox" id="gym" class="checkbox">
+          <label for="gym" class="checkbox-label">Seleccionar este servicio</label>
+        </div>
+      </div>
+
+      <!-- Traslado y transporte -->
+      <div class="card" data-id="transport" data-price="50">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🚕</span>
+            Traslado y transporte
+          </div>
+          <p class="card-description">
+            Transporte cómodo y seguro desde y hacia el hotel.
+          </p>
+        </div>
+        <div class="card-content">
+          <img src="Imagenes/Translado.jpg" alt="Traslado y transporte" class="card-image">
+        </div>
+        <div class="card-footer">
+          <input type="checkbox" id="transport" class="checkbox">
+          <label for="transport" class="checkbox-label">Seleccionar este servicio</label>
+        </div>
+      </div>
+
+      <!-- Comida y bebidas extra -->
+      <div class="card" data-id="extra-food" data-price="25">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🍔</span>
+            Comida y bebidas extra
+          </div>
+          <p class="card-description">
+            Agrega opciones adicionales de comida y bebida.
+          </p>
+        </div>
+        <div class="card-content">
+          <img src="Imagenes/ComidaExtra.jpg" alt="Comida y bebidas extra" class="card-image">
+        </div>
+        <div class="card-footer">
+          <input type="checkbox" id="extra-food" class="checkbox">
+          <label for="extra-food" class="checkbox-label">Seleccionar este servicio</label>
+        </div>
+      </div>
+
+      <!-- Actividades y tours -->
+      <div class="card" data-id="tours" data-price="40">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">🎟️</span>
+            Actividades y tours
+          </div>
+          <p class="card-description">
+            Explora las mejores atracciones y actividades turísticas.
+          </p>
+        </div>
+        <div class="card-content">
+          <img src="Imagenes/Tours.jpg" alt="Actividades y tours" class="card-image">
+        </div>
+        <div class="card-footer">
+          <input type="checkbox" id="tours" class="checkbox">
+          <label for="tours" class="checkbox-label">Seleccionar este servicio</label>
+        </div>
+      </div>
+
+      <!-- Luna de miel -->
+      <div class="card" data-id="honeymoon" data-price="100">
+        <div class="card-header">
+          <div class="card-title">
+            <span class="icon">💍</span>
+            Luna de miel
+          </div>
+          <p class="card-description">
+            Haz de tu luna de miel una experiencia inolvidable.
+          </p>
+        </div>
+        <div class="card-content">
+          <img src="Imagenes/LunaMiel.jpg" alt="Paquete de luna de miel" class="card-image">
+        </div>
+        <div class="card-footer">
+          <input type="checkbox" id="honeymoon" class="checkbox">
+          <label for="honeymoon" class="checkbox-label">Seleccionar este servicio</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button id="finish-button">Finalizar y proceder al Check-in</button>
+    </div>
+  </div>
+
+  <!-- Modal de confirmación -->
+  <div id="confirm-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-header">¿Seguro que deseas continuar sin servicios?</div>
+      <div class="modal-body">
+        <p>No has seleccionado ningún servicio. ¿Quieres continuar sin agregar servicios adicionales?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="confirm-continue-button" class="confirmation-button">Sí, continuar</button>
+        <button id="cancel-button" class="cancel-button">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de resumen de servicios -->
+  <div id="checkin-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-header">Resumen de tu selección</div>
+      <div class="modal-body">
+        <ul id="service-list" class="service-list"></ul>
+        <div class="total" id="total-price"></div>
+
+        <!-- Método de pago -->
+        <div class="payment-method-container">
+          <label for="payment-method">Selecciona tu método de pago:</label>
+          <select id="payment-method" name="payment-method">
+            <option value="credit-card">Tarjeta de Crédito</option>
+            <option value="debit-card">Tarjeta de Débito</option>
+            <option value="cash">Efectivo</option>
+          </select>
+
+          <div id="payment-details"></div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="proceed-button" class="confirmation-button">Finalizar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const selectedServices = new Set();
+      const prices = {};
+      const servicePrices = {
+        'room-service': 30,
+        'gym': 15,
+        'transport': 50,
+        'extra-food': 25,
+        'tours': 40,
+        'honeymoon': 100
+      };
+
+      const paymentMethodSelect = document.getElementById('payment-method');
+      const paymentDetails = document.getElementById('payment-details');
+
+      // Función para manejar la selección de métodos de pago
+      paymentMethodSelect.addEventListener('change', (event) => {
+        const selectedMethod = event.target.value;
+
+        // Limpiar contenido previo
+        paymentDetails.innerHTML = '';
+
+        if (selectedMethod === 'credit-card' || selectedMethod === 'debit-card') {
+          paymentDetails.innerHTML = `
+            <label for="card-number">Número de tarjeta:</label>
+            <input type="text" id="card-number" placeholder="Ingresa el número de la tarjeta" required>
+          `;
+        } else if (selectedMethod === 'cash') {
+          paymentDetails.innerHTML = '<p class="payment-description">Pago en efectivo.</p>';
+        }
+      });
+
+      // Manejar selección de servicios al hacer clic en el contenedor
+      document.querySelectorAll('.card').forEach((card) => {
+        card.addEventListener('click', (event) => {
+          const checkbox = card.querySelector('.checkbox');
+          const id = checkbox.id;
+
+          if (checkbox.checked) {
+            checkbox.checked = false;
+            selectedServices.delete(id);
+          } else {
+            checkbox.checked = true;
+            selectedServices.add(id);
+          }
+        });
+      });
+
+      // Manejar botón de finalizar
+      document.getElementById('finish-button').addEventListener('click', () => {
+        if (selectedServices.size === 0) {
+          // Si no hay servicios seleccionados, mostrar el modal de confirmación
+          showConfirmModal();
+        } else {
+          // Si hay servicios seleccionados, proceder al modal de resumen
+          showModal();
+        }
+      });
+
+      // Mostrar el modal de confirmación
+      function showConfirmModal() {
+        const confirmModal = document.getElementById('confirm-modal');
+        confirmModal.style.display = 'block';
+
+        // Cerrar el modal de confirmación
+        document.querySelector('#confirm-modal .close').addEventListener('click', () => {
+          confirmModal.style.display = 'none';
+        });
+
+        // Confirmar que el usuario desea continuar sin servicios
+        document.getElementById('confirm-continue-button').addEventListener('click', () => {
+          confirmModal.style.display = 'none';
+          showModal(); // Proceder al modal de resumen
+        });
+
+        // Cancelar la acción y cerrar el modal
+        document.getElementById('cancel-button').addEventListener('click', () => {
+          confirmModal.style.display = 'none';
+        });
+      }
+
+      // Mostrar el modal con resumen de servicios seleccionados
+      function showModal() {
+        const modal = document.getElementById('checkin-modal');
+        const serviceList = document.getElementById('service-list');
+        const totalPriceElement = document.getElementById('total-price');
+
+        // Limpiar contenido previo
+        serviceList.innerHTML = '';
+        let total = 0;
+
+        // Agregar servicios seleccionados
+        selectedServices.forEach(serviceId => {
+          const listItem = document.createElement('li');
+          const price = servicePrices[serviceId];
+          listItem.textContent = `${capitalizeFirstLetter(serviceId.replace('-', ' '))} - $${price}`;
+          serviceList.appendChild(listItem);
+          total += price;
+        });
+
+        // Mostrar precio total
+        totalPriceElement.textContent = `Total: $${total}`;
+
+        // Mostrar el modal de check-in
+        modal.style.display = 'block';
+
+        // Cerrar el modal de check-in
+        document.querySelector('.close').addEventListener('click', () => {
+          modal.style.display = 'none';
+        });
+
+        // Proceder con el check-in
+        document.getElementById('proceed-button').addEventListener('click', () => {
+          alert('¡Check-in completado!');
+          modal.style.display = 'none';
+        });
+      }
+
+      // Función para capitalizar la primera letra de las palabras
+      function capitalizeFirstLetter(str) {
+        return str.replace(/\b\w/g, function(char) {
+          return char.toUpperCase();
+        });
+      }
+    });
+  </script>
+</body>
+</html>
