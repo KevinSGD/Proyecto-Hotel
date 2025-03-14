@@ -98,5 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
         [nombreError, apellidosError, emailError, passwordError, confirmPasswordError].forEach(error => {
             error.style.display = 'none';
         });
+
+        // Redirigir a la página de inicio u otra interfaz
+        window.location.href = '../InterfazPrincipal/Interfaz.html';
+
     });
 });
