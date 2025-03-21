@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Exitoso</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+        }
+
+        /* Loader Styles */
+        .loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 100px;
+            margin-top: -100px;
+            margin-left: -100px;
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        .loader--reflect {
+            margin-top: 0;
+        }
+        .loader--reflect:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -25%;
+            width: 150%;
+            height: 110%;
+            background: linear-gradient(0deg, #1e3f57, #5c9bb5);
+        }
+        .bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 20px;
+            height: 100px;
+            background: linear-gradient(180deg, #1e3f57, #5c9bb5);
+            transform: scaleY(0);
+            transform-style: preserve-3d;
+            animation: bar 4s cubic-bezier(.81,.04,.4,.7) infinite;
+        }
+        .bar:nth-child(n) {
+            animation-delay: calc(100ms * var(--i));
+            left: calc(20px * var(--i));
+        }
+        @keyframes bar {
+            0% { transform: rotateZ(-180deg) rotateX(-360deg); }
+            75%,100% { transform: rotateZ(0) rotateX(0); }
+        }
+        .success-message {
+            display: none;
+            text-align: center;
+        }
+        .success-message h2 {
+            color: #0a0a7a;
+        }
+        .success-message button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #0a0a7a;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .success-message button:hover {
+            background-color: #0a0a7a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loader" id="loader">
+            <div class="bar" style="--i:1"></div>
+            <div class="bar" style="--i:2"></div>
+            <div class="bar" style="--i:3"></div>
+            <div class="bar" style="--i:4"></div>
+            <div class="bar" style="--i:5"></div>
+            <div class="bar" style="--i:6"></div>
+            <div class="bar" style="--i:7"></div>
+            <div class="bar" style="--i:8"></div>
+            <div class="bar" style="--i:9"></div>
+            <div class="bar" style="--i:10"></div>
+        </div>
+        <div class="success-message" id="successMessage">
+            <h2>Registro Exitoso</h2>
+            <button onclick="location.href='/ProyectoHotel/Login/Login.html'">Iniciar Sesión</button>
+        </div>
+    </div>
+    <script>
+        setTimeout(() => {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+        }, 8000);
+    </script>
+</body>
+</html>
