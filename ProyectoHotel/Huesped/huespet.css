@@ -75,13 +75,14 @@
   }
   
   .btn-outline {
-    background-color: transparent;
-    color: var(--primary);
-    border: 1px solid var(--primary);
+    background-color: white;
+    color: var(--primary-dark);
+    border: 1px solid var(--primary-dark);
   }
   
   .btn-outline:hover {
-    background-color: var(--primary-lightest);
+    background-color: var(--primary-dark);
+    color: white;
   }
   
   .btn-sm {
