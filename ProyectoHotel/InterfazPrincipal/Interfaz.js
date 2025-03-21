@@ -1,14 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
     console.log("El script se está ejecutando correctamente");
 
-    const registrarBtn = document.getElementById("registrar-btn");
+    const LoginBtn = document.getElementById("Login-btn");
 
-    if (registrarBtn) {
-        registrarBtn.addEventListener("click", function () {
-            // Redirigir a la interfaz de registro de usuarios
-            window.location.href = "../InicioSesion/RegistroUsuarios.html";
+    if (LoginBtn) {
+        LoginBtn.addEventListener("click", function () {
+            // Redirigir a la interfaz de Login de usuarios
+            window.location.href = "../Login/Login.html";
         });
     }
+   
 
   // Set current year in footer
   document.getElementById("current-year").textContent = new Date().getFullYear();
@@ -46,6 +47,15 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  const registrarBtn = document.getElementById("registrar-btn");
+
+  if (registrarBtn) {
+      registrarBtn.addEventListener("click", function () {
+          // Redirigir a la interfaz de registro de usuarios
+          window.location.href = "../InicioSesion/RegistroUsuarios.html";
+      });
+  }
+ 
   // Initial check
   checkScroll();
   window.addEventListener("scroll", checkScroll);
