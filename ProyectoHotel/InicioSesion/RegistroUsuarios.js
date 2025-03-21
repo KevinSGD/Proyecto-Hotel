@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    
     // Evento para el botón de registro
     btnRegistrar.addEventListener('click', function() {
         if (validarFormulario()) {
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Limpiar formulario
             form.reset();
+            window.location.href = "../InicioSesion/Loader.html";
         }
     });
     
