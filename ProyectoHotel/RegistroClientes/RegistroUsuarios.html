@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro | Horizon Prime</title>
     <link rel="stylesheet" href="RegistroUsuarios.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -27,45 +33,152 @@
                 <p>Regístrese para acceder a Horizon Prime</p>
             </div>
             
-            <form id="registroForm" class="registro-form">
+            <form id="registroForm" class="registro-form" action="registro.php" method="POST">
                 <div class="form-group">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Ingrese su nombre">
-                    <div id="nombreError" class="error-message">El nombre es obligatorio</div>
+                    <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Ingrese su nombre" required>
+                    <div id="nombreError" class="error"></div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="apellidos" class="form-label">Apellidos</label>
-                    <input type="text" id="apellidos" name="apellidos" class="form-input" placeholder="Ingrese sus apellidos">
-                    <div id="apellidosError" class="error-message">Los apellidos son obligatorios</div>
+                    <label for="apellido" class="form-label">Apellidos</label>
+                    <input type="text" id="apellido" name="apellido" class="form-input" placeholder="Ingrese sus apellidos" required>
+                    <div id="apellidoError" class="error"></div>
                 </div>
                 
                 <div class="form-group">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" id="email" name="email" class="form-input" placeholder="ejemplo@correo.com">
-                    <div id="emailError" class="error-message">Ingrese un email válido</div>
+                    <input type="email" id="email" name="email" class="form-input" placeholder="ejemplo@correo.com" required>
+                    <div id="emailError" class="error"></div>
                 </div>
                 
                 <div class="form-group">
                     <label for="password" class="form-label">Contraseña</label>
-                    <input type="password" id="password" name="password" class="form-input" placeholder="Ingrese su contraseña">
-                    <div id="passwordError" class="error-message">La contraseña debe tener al menos 6 caracteres</div>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Ingrese su contraseña" required>
+                    <div id="passwordError" class="error"></div>
                 </div>
                 
                 <div class="form-group">
                     <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirme su contraseña">
-                    <div id="confirmPasswordError" class="error-message">Las contraseñas no coinciden</div>
+                    <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="Confirme su contraseña" required>
+                    <div id="confirmPasswordError" class="error"></div>
+                </div>
+                
+                <div class="form-footer">
+                    <button type="reset" id="btnCancelar" class="btn btn-outline">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Registrar</button>
                 </div>
             </form>
-            
-            <div class="form-footer">
-                <button type="button" class="btn btn-outline" id="btnCancelar">Cancelar</button>
-                <button type="button" class="btn btn-primary" id="btnRegistrar">Registrar</button>
-            </div>
         </div>
     </div>
-    
-    <script src="RegistroUsuarios.js"></script>
-</body>
-</html>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('registroForm');
+    const btnCancelar = document.getElementById('btnCancelar');
+
+    // Campos del formulario
+    const nombre = document.getElementById('nombre');
+    const apellido = document.getElementById('apellido');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+
+    // Mensajes de error
+    const errores = {
+        nombre: document.getElementById('nombreError'),
+        apellido: document.getElementById('apellidoError'),
+        email: document.getElementById('emailError'),
+        password: document.getElementById('passwordError'),
+        confirmPassword: document.getElementById('confirmPasswordError')
+    };
+
+    // Validar formulario
+    function validarFormulario() {
+        let isValid = true;
+
+        // Limpiar errores previos
+        Object.values(errores).forEach(error => error.innerText = "");
+
+        // Validar nombre
+        if (nombre.value.trim() === '') {
+            errores.nombre.innerText = "El nombre es obligatorio";
+            isValid = false;
+        }
+
+        // Validar apellidos
+        if (apellido.value.trim() === '') {
+            errores.apellido.innerText = "Los apellidos son obligatorios";
+            isValid = false;
+        }
+
+        // Validar email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email.value)) {
+            errores.email.innerText = "Ingrese un email válido";
+            isValid = false;
+        }
+
+        // Validar contraseña
+        if (password.value.length < 6) {
+            errores.password.innerText = "La contraseña debe tener al menos 6 caracteres";
+            isValid = false;
+        }
+
+        // Validar confirmación de contraseña
+        if (password.value !== confirmPassword.value) {
+            errores.confirmPassword.innerText = "Las contraseñas no coinciden";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    // Evento para validar al escribir
+    [nombre, apellido, email, password, confirmPassword].forEach(input => {
+        input.addEventListener('input', validarFormulario);
+    });
+
+    // Evento para el formulario
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        if (validarFormulario()) {
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('registro.php', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    const errorText = await response.text();
+                    throw new Error(`Error HTTP ${response.status}: ${errorText}`);
+                }
+
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    alert("Registro exitoso. Ahora puede iniciar sesión.");
+                    form.reset();
+                    window.location.href = "../InicioSesion/Loader.html"; // Cambia la ruta según sea necesario
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un problema en el servidor.");
+            }
+        }
+    });
+
+    // Evento para el botón de cancelar
+    if (btnCancelar) {
+        btnCancelar.addEventListener('click', function () {
+            form.reset();
+            Object.values(errores).forEach(error => error.innerText = "");
+            window.location.href = '../InterfazPrincipal/Interfaz.html'; // Cambia la ruta según sea necesario
+        });
+    }
+});
