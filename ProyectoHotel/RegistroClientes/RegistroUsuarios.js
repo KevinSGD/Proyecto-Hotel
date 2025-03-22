@@ -74,24 +74,36 @@ document.addEventListener('DOMContentLoaded', function() {
     
     
     // Evento para el botón de registro
-    btnRegistrar.addEventListener('click', function() {
+    btnRegistrar.addEventListener('click', async function () {
         if (validarFormulario()) {
-            // Aquí iría el código para enviar los datos al servidor
-            alert('Registro exitoso. Ahora puede iniciar sesión con sus credenciales.');
-            
-            // Simulación de envío de datos
-            console.log({
-                nombre: nombre.value,
-                apellidos: apellidos.value,
-                email: email.value,
-                password: password.value
-            });
-            
-            // Limpiar formulario
-            form.reset();
-            window.location.href = "../InicioSesion/Loader.html";
+            const formData = new FormData();
+            formData.append('nombre', nombre.value);
+            formData.append('apellidos', apellidos.value);
+            formData.append('email', email.value);
+            formData.append('password', password.value);
+    
+            try {
+                const response = await fetch('register.php', {
+                    method: 'POST',
+                    body: formData
+                });
+    
+                const result = await response.json();
+    
+                if (result.status === "success") {
+                    alert("Registro exitoso. Ahora puede iniciar sesión.");
+                    form.reset();
+                    window.location.href = "../InicioSesion/Loader.html";
+                } else {
+                    alert(result.message);
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Hubo un problema en el servidor.");
+            }
         }
     });
+    
     
     // Evento para el botón de cancelar
     btnCancelar.addEventListener('click', function() {
