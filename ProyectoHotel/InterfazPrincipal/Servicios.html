@@ -41,11 +41,14 @@
       min-height: 100vh;
     }
 
-    .header {
+    /* Navigation Bar */
+    .navbar {
       background-color: var(--white);
       box-shadow: var(--shadow);
-      padding: 15px 0;
-      position: relative;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
     .container {
@@ -54,13 +57,19 @@
       padding: 0 20px;
     }
 
-    .logo {
+    .nav-container {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
     }
 
-    .logo-icon {
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
       width: 40px;
       height: 40px;
       background-color: var(--primary);
@@ -77,6 +86,64 @@
       font-weight: 700;
       font-size: 20px;
       color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 0;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .login-btn {
+      background-color: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-weight: 600;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .login-btn:hover {
+      background-color: var(--primary);
+      color: var(--white);
     }
 
     .page-title {
@@ -354,14 +421,75 @@
     .delay-5 { animation-delay: 1s; }
     .delay-6 { animation-delay: 1.2s; }
 
+    /* Mobile menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
     /* Responsive styles */
     @media (max-width: 768px) {
-      .services-grid {
-        grid-template-columns: 1fr;
+      .nav-links {
+        display: none;
       }
 
-      .page-title {
-        font-size: 2rem;
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--white);
+        z-index: 1001;
+        padding: 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .mobile-nav.active {
+        transform: translateX(0);
+      }
+
+      .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .mobile-nav-close {
+        background: none;
+        border: none;
+        color: var(--primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .mobile-nav-link {
+        color: var(--secondary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.2rem;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--light);
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
       }
 
       .service-card {
@@ -372,15 +500,27 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <div class="logo">
-        <div class="logo-icon">H</div>
-        <span class="logo-text">Horizon Prime</span>
-      </div>
+ <!-- Navigation Bar -->
+ <nav class="navbar">
+  <div class="container nav-container">
+    <a href="../InterfazPrincipal/Interfaz.html" class="logo-container">
+      <div class="logo">H</div>
+      <span class="logo-text">Horizon Prime</span>
+    </a>
+    
+    <div class="nav-links">
+      <a href="../InterfazPrincipal/Interfaz.html" class="nav-link">Inicio</a>
+      <a href="../InterfazPrincipal/Habitaciones.html"class="nav-link active">Habitaciones</a>
+      <a href="../InterfazPrincipal/Servicios.html" class="nav-link">Servicios</a>
     </div>
-  </header>
+    
+    <a href="../Login/Login.html" class="login-btn">Inicio Sesión</a>
+    
+    <button class="mobile-menu-btn">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
 
   <div class="container">
     <h1 class="page-title fade-in">Servicios Exclusivos</h1>
@@ -561,6 +701,21 @@
   <script>
     // Set current year in footer
     document.getElementById("current-year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+    const mobileMenuCloseBtn = document.querySelector(".mobile-nav-close");
+    const mobileNav = document.querySelector(".mobile-nav");
+
+    mobileMenuBtn.addEventListener("click", function() {
+      mobileNav.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+
+    mobileMenuCloseBtn.addEventListener("click", function() {
+      mobileNav.classList.remove("active");
+      document.body.style.overflow = "";
+    });
 
     // Animation on scroll
     document.addEventListener("DOMContentLoaded", function() {
