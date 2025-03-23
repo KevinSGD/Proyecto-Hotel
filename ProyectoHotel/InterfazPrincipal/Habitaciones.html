@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,6 +67,8 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      text-decoration: none !important;
+
     }
 
     .logo {
@@ -392,13 +395,28 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    .delay-1 { animation-delay: 0.2s; }
-    .delay-2 { animation-delay: 0.4s; }
-    .delay-3 { animation-delay: 0.6s; }
+    .delay-1 {
+      animation-delay: 0.2s;
+    }
+
+    .delay-2 {
+      animation-delay: 0.4s;
+    }
+
+    .delay-3 {
+      animation-delay: 0.6s;
+    }
 
     /* Mobile menu */
     .mobile-menu-btn {
@@ -477,22 +495,24 @@
     }
   </style>
 </head>
+
 <body>
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="container nav-container">
+      <a href="../InterfazPrincipal/Interfaz.html" class="logo-container">
         <div class="logo">H</div>
         <span class="logo-text">Horizon Prime</span>
       </a>
-      
+
       <div class="nav-links">
         <a href="../InterfazPrincipal/Interfaz.html" class="nav-link">Inicio</a>
-        <a href="../InterfazPrincipal/Habitaciones.html" class="nav-link active">Habitaciones</a>
+        <a href="habitaciones.html" class="nav-link active">Habitaciones</a>
         <a href="../InterfazPrincipal/Servicios.html" class="nav-link">Servicios</a>
       </div>
-      
+
       <a href="../Login/Login.html" class="login-btn">Inicio Sesión</a>
-      
+
       <button class="mobile-menu-btn">
         <i class="fas fa-bars"></i>
       </button>
@@ -511,33 +531,27 @@
   <section class="room-categories">
     <div class="container">
       <h2 class="section-title fade-in">Experiencias de Alojamiento Excepcionales</h2>
-      
-      <div class="category-tabs fade-in delay-1">
-        <button class="category-tab active">Todas</button>
-        <button class="category-tab">Suites</button>
-        <button class="category-tab">Habitaciones Deluxe</button>
-        <button class="category-tab">Habitaciones Premium</button>
-        <button class="category-tab">Villas</button>
-      </div>
-      
       <div class="rooms-container">
         <!-- Suite Presidencial -->
         <div class="room-card fade-in">
           <div class="room-image-container">
-            <img src="https://images.trvl-media.com/lodging/1000000/50000/44400/44342/5d0cc689.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" alt="Suite Presidencial" class="room-image">
+            <img src="https://placehold.co/1000x600/blue/white" alt="Suite Presidencial" class="room-image">
             <div class="room-badge">Suite Presidencial</div>
           </div>
-          
+
           <div class="room-content">
             <h3 class="room-title">Suite Presidencial Horizon</h3>
             <div class="room-price">
               $850 <span class="price-period">por noche</span>
             </div>
-            
+
             <p class="room-description">
-              Nuestra Suite Presidencial es la máxima expresión del lujo y la exclusividad. Con 200 m² de espacio, ofrece vistas panorámicas al océano, terraza privada, jacuzzi exterior, y un servicio de mayordomo personal disponible las 24 horas. El diseño interior combina elementos contemporáneos con toques clásicos, creando un ambiente sofisticado y acogedor.
+              Nuestra Suite Presidencial es la máxima expresión del lujo y la exclusividad. Con 200 m² de espacio,
+              ofrece vistas panorámicas al océano, terraza privada, jacuzzi exterior, y un servicio de mayordomo
+              personal disponible las 24 horas. El diseño interior combina elementos contemporáneos con toques clásicos,
+              creando un ambiente sofisticado y acogedor.
             </p>
-            
+
             <div class="room-features">
               <div class="feature">
                 <i class="fas fa-ruler-combined"></i>
@@ -564,10 +578,10 @@
                 <span>Jacuzzi privado</span>
               </div>
             </div>
-            
+
             <div class="room-details">
               <h4 class="details-title">Detalles de la Suite</h4>
-              
+
               <div class="details-grid">
                 <div class="detail-item">
                   <div class="detail-icon">
@@ -575,30 +589,33 @@
                   </div>
                   <div class="detail-content">
                     <h4>Dormitorio Principal</h4>
-                    <p>Cama King Size con ropa de cama de 1000 hilos, selección de almohadas premium y vestidor independiente.</p>
+                    <p>Cama King Size con ropa de cama de 1000 hilos, selección de almohadas premium y vestidor
+                      independiente.</p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-bath"></i>
                   </div>
                   <div class="detail-content">
                     <h4>Baño de Mármol</h4>
-                    <p>Bañera de hidromasaje, ducha de efecto lluvia, productos de baño de lujo y albornoces de algodón egipcio.</p>
+                    <p>Bañera de hidromasaje, ducha de efecto lluvia, productos de baño de lujo y albornoces de algodón
+                      egipcio.</p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-couch"></i>
                   </div>
                   <div class="detail-content">
                     <h4>Sala de Estar</h4>
-                    <p>Amplio salón con sofás de diseño, sistema de entretenimiento de última generación y bar privado.</p>
+                    <p>Amplio salón con sofás de diseño, sistema de entretenimiento de última generación y bar privado.
+                    </p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-utensils"></i>
@@ -612,24 +629,27 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Suite Ejecutiva -->
         <div class="room-card fade-in delay-1">
           <div class="room-image-container">
             <img src="https://placehold.co/1000x600/blue/white" alt="Suite Ejecutiva" class="room-image">
             <div class="room-badge">Suite Ejecutiva</div>
           </div>
-          
+
           <div class="room-content">
             <h3 class="room-title">Suite Ejecutiva Skyline</h3>
             <div class="room-price">
               $550 <span class="price-period">por noche</span>
             </div>
-            
+
             <p class="room-description">
-              La Suite Ejecutiva Skyline combina funcionalidad y elegancia para el viajero de negocios exigente. Con 120 m² de espacio, incluye una zona de trabajo equipada con la última tecnología, sala de reuniones privada y vistas espectaculares de la ciudad. El diseño minimalista y sofisticado crea un ambiente perfecto para trabajar y descansar.
+              La Suite Ejecutiva Skyline combina funcionalidad y elegancia para el viajero de negocios exigente. Con 120
+              m² de espacio, incluye una zona de trabajo equipada con la última tecnología, sala de reuniones privada y
+              vistas espectaculares de la ciudad. El diseño minimalista y sofisticado crea un ambiente perfecto para
+              trabajar y descansar.
             </p>
-            
+
             <div class="room-features">
               <div class="feature">
                 <i class="fas fa-ruler-combined"></i>
@@ -656,10 +676,10 @@
                 <span>Wi-Fi de alta velocidad</span>
               </div>
             </div>
-            
+
             <div class="room-details">
               <h4 class="details-title">Detalles de la Suite</h4>
-              
+
               <div class="details-grid">
                 <div class="detail-item">
                   <div class="detail-icon">
@@ -667,30 +687,33 @@
                   </div>
                   <div class="detail-content">
                     <h4>Dormitorio</h4>
-                    <p>Cama King Size con sistema de descanso ergonómico, cortinas blackout automatizadas y sistema de sonido envolvente.</p>
+                    <p>Cama King Size con sistema de descanso ergonómico, cortinas blackout automatizadas y sistema de
+                      sonido envolvente.</p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-laptop"></i>
                   </div>
                   <div class="detail-content">
                     <h4>Oficina Privada</h4>
-                    <p>Escritorio ergonómico, silla ejecutiva, impresora multifunción y conexiones para videoconferencias.</p>
+                    <p>Escritorio ergonómico, silla ejecutiva, impresora multifunción y conexiones para
+                      videoconferencias.</p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-users"></i>
                   </div>
                   <div class="detail-content">
                     <h4>Sala de Reuniones</h4>
-                    <p>Espacio para 6 personas con pantalla interactiva, sistema de videoconferencia y servicio de catering disponible.</p>
+                    <p>Espacio para 6 personas con pantalla interactiva, sistema de videoconferencia y servicio de
+                      catering disponible.</p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-concierge-bell"></i>
@@ -704,24 +727,27 @@
             </div>
           </div>
         </div>
-        
+
         <!-- Habitación Deluxe -->
         <div class="room-card fade-in delay-2">
           <div class="room-image-container">
-            <img src="https://images.trvl-media.com/lodging/1000000/50000/44400/44342/5d0cc689.jpg?impolicy=resizecrop&rw=575&rh=575&ra=fill" alt="Habitación Deluxe" class="room-image">
+            <img src="https://placehold.co/1000x600/blue/white" alt="Habitación Deluxe" class="room-image">
             <div class="room-badge">Habitación Deluxe</div>
           </div>
-          
+
           <div class="room-content">
             <h3 class="room-title">Habitación Deluxe Ocean View</h3>
             <div class="room-price">
               $350 <span class="price-period">por noche</span>
             </div>
-            
+
             <p class="room-description">
-              Nuestras habitaciones Deluxe Ocean View ofrecen 60 m² de elegancia y confort con impresionantes vistas al océano. El diseño contemporáneo se complementa con elementos naturales y una paleta de colores inspirada en el mar. Cada habitación cuenta con un balcón privado donde podrá disfrutar del espectacular amanecer o atardecer sobre el océano.
+              Nuestras habitaciones Deluxe Ocean View ofrecen 60 m² de elegancia y confort con impresionantes vistas al
+              océano. El diseño contemporáneo se complementa con elementos naturales y una paleta de colores inspirada
+              en el mar. Cada habitación cuenta con un balcón privado donde podrá disfrutar del espectacular amanecer o
+              atardecer sobre el océano.
             </p>
-            
+
             <div class="room-features">
               <div class="feature">
                 <i class="fas fa-ruler-combined"></i>
@@ -748,10 +774,10 @@
                 <span>Ducha de lluvia</span>
               </div>
             </div>
-            
+
             <div class="room-details">
               <h4 class="details-title">Detalles de la Habitación</h4>
-              
+
               <div class="details-grid">
                 <div class="detail-item">
                   <div class="detail-icon">
@@ -759,20 +785,22 @@
                   </div>
                   <div class="detail-content">
                     <h4>Área de Descanso</h4>
-                    <p>Cama Queen Size con colchón premium, selección de almohadas y ropa de cama de algodón egipcio.</p>
+                    <p>Cama Queen Size con colchón premium, selección de almohadas y ropa de cama de algodón egipcio.
+                    </p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-bath"></i>
                   </div>
                   <div class="detail-content">
                     <h4>Baño Privado</h4>
-                    <p>Ducha de efecto lluvia, bañera independiente, productos de baño orgánicos y espejo con iluminación LED.</p>
+                    <p>Ducha de efecto lluvia, bañera independiente, productos de baño orgánicos y espejo con
+                      iluminación LED.</p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-tv"></i>
@@ -782,7 +810,7 @@
                     <p>Smart TV de 55", sistema de sonido Bluetooth y selección de películas a la carta.</p>
                   </div>
                 </div>
-                
+
                 <div class="detail-item">
                   <div class="detail-icon">
                     <i class="fas fa-coffee"></i>
@@ -816,27 +844,27 @@
     const mobileMenuCloseBtn = document.querySelector(".mobile-nav-close");
     const mobileNav = document.querySelector(".mobile-nav");
 
-    mobileMenuBtn.addEventListener("click", function() {
+    mobileMenuBtn.addEventListener("click", function () {
       mobileNav.classList.add("active");
       document.body.style.overflow = "hidden";
     });
 
-    mobileMenuCloseBtn.addEventListener("click", function() {
+    mobileMenuCloseBtn.addEventListener("click", function () {
       mobileNav.classList.remove("active");
       document.body.style.overflow = "";
     });
 
     // Category tabs functionality
     const categoryTabs = document.querySelectorAll(".category-tab");
-    
+
     categoryTabs.forEach(tab => {
-      tab.addEventListener("click", function() {
+      tab.addEventListener("click", function () {
         // Remove active class from all tabs
         categoryTabs.forEach(t => t.classList.remove("active"));
-        
+
         // Add active class to clicked tab
         this.classList.add("active");
-        
+
         // Here you would normally filter the rooms based on the selected category
         // For this demo, we'll just log the selected category
         console.log("Selected category: " + this.textContent);
@@ -844,9 +872,9 @@
     });
 
     // Animation on scroll
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
       const fadeElements = document.querySelectorAll('.fade-in');
-      
+
       // Trigger animations immediately for elements in viewport
       fadeElements.forEach(element => {
         element.style.opacity = "1";
@@ -854,4 +882,5 @@
     });
   </script>
 </body>
+
 </html>
