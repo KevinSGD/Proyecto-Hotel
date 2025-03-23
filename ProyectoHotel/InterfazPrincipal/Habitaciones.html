@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Horizon Prime Hotel - Nuestras Habitaciones</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e40af;
+      --primary-dark: #1e3a8a;
+      --primary-light: #3b82f6;
+      --primary-lighter: #93c5fd;
+      --secondary: #0f172a;
+      --secondary-light: #1e293b;
+      --accent: #0ea5e9;
+      --white: #ffffff;
+      --light: #f1f5f9;
+      --light-blue: #e0f2fe;
+      --gray: #64748b;
+      --dark: #0f172a;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      line-height: 1.6;
+      color: var(--dark);
+      background-color: var(--light);
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      background-color: var(--primary);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    .logo-text {
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--primary);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 0;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .nav-link.active {
+      color: var(--primary);
+    }
+
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .login-btn {
+      background-color: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 30px;
+      padding: 8px 20px;
+      font-weight: 600;
+      transition: var(--transition);
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .login-btn:hover {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 300px;
+      background-image: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.7)), url('https://placehold.co/1920x500/blue/white');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      color: var(--light-blue);
+    }
+
+    /* Room Categories */
+    .room-categories {
+      padding: 40px 0;
+      background-color: var(--white);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      color: var(--primary-dark);
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(to right, var(--primary-light), var(--primary-dark));
+      border-radius: 3px;
+    }
+
+    .category-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .category-tab {
+      padding: 10px 20px;
+      background-color: var(--light);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: var(--transition);
+      color: var(--gray);
+    }
+
+    .category-tab:hover {
+      background-color: var(--light-blue);
+      color: var(--primary);
+    }
+
+    .category-tab.active {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+
+    /* Room Cards */
+    .rooms-container {
+      margin-top: 40px;
+    }
+
+    .room-card {
+      background-color: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .room-card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .room-image-container {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+    }
+
+    .room-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .room-card:hover .room-image {
+      transform: scale(1.05);
+    }
+
+    .room-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: var(--primary-dark);
+      color: var(--white);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .room-content {
+      padding: 30px;
+    }
+
+    .room-title {
+      font-size: 1.8rem;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+
+    .room-price {
+      color: var(--primary);
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .price-period {
+      font-size: 0.9rem;
+      color: var(--gray);
+      font-weight: 400;
+    }
+
+    .room-description {
+      color: var(--gray);
+      margin-bottom: 20px;
+      line-height: 1.7;
+    }
+
+    .room-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--secondary-light);
+    }
+
+    .feature i {
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .room-details {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--light-blue);
+    }
+
+    .details-title {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 15px;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .detail-icon {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-top: 3px;
+    }
+
+    .detail-content h4 {
+      color: var(--secondary-light);
+      font-size: 1rem;
+      margin-bottom: 5px;
+    }
+
+    .detail-content p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--secondary);
+      color: var(--light);
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .footer p {
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+
+    /* Animation classes */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.8s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+
+    /* Mobile menu */
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .mobile-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--white);
+        z-index: 1001;
+        padding: 20px;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+
+      .mobile-nav.active {
+        transform: translateX(0);
+      }
+
+      .mobile-nav-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .mobile-nav-close {
+        background: none;
+        border: none;
+        color: var(--primary);
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      .mobile-nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .mobile-nav-link {
+        color: var(--secondary);
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.2rem;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--light);
+      }
+
+      .room-card {
+        margin: 0 20px 40px;
+      }
+
+      .room-image-container {
+        height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="../InterfazPrincipal/Interfaz.html" class="logo-container">
+        <div class="logo">H</div>
+        <span class="logo-text">Horizon Prime</span>
+      </a>
+      
+      <div class="nav-links">
+        <a href="../InterfazPrincipal/Interfaz.html" class="nav-link">Inicio</a>
+        <a href="habitaciones.html" class="nav-link active">Habitaciones</a>
+        <a href="../InterfazPrincipal/Servicios.html" class="nav-link">Servicios</a>
+      </div>
+      
+      <a href="../Login/Login.html" class="login-btn">Inicio Sesión</a>
+      
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="fade-in">Nuestras Habitaciones</h1>
+      <p class="fade-in delay-1">Descubra el lujo y confort que ofrecen nuestras exclusivas habitaciones</p>
+    </div>
+  </section>
+
+  <!-- Room Categories -->
+  <section class="room-categories">
+    <div class="container">
+      <h2 class="section-title fade-in">Experiencias de Alojamiento Excepcionales</h2>
+      
+      <div class="category-tabs fade-in delay-1">
+        <button class="category-tab active">Todas</button>
+        <button class="category-tab">Suites</button>
+        <button class="category-tab">Habitaciones Deluxe</button>
+        <button class="category-tab">Habitaciones Premium</button>
+        <button class="category-tab">Villas</button>
+      </div>
+      
+      <div class="rooms-container">
+        <!-- Suite Presidencial -->
+        <div class="room-card fade-in">
+          <div class="room-image-container">
+            <img src="https://placehold.co/1000x600/blue/white" alt="Suite Presidencial" class="room-image">
+            <div class="room-badge">Suite Presidencial</div>
+          </div>
+          
+          <div class="room-content">
+            <h3 class="room-title">Suite Presidencial Horizon</h3>
+            <div class="room-price">
+              $850 <span class="price-period">por noche</span>
+            </div>
+            
+            <p class="room-description">
+              Nuestra Suite Presidencial es la máxima expresión del lujo y la exclusividad. Con 200 m² de espacio, ofrece vistas panorámicas al océano, terraza privada, jacuzzi exterior, y un servicio de mayordomo personal disponible las 24 horas. El diseño interior combina elementos contemporáneos con toques clásicos, creando un ambiente sofisticado y acogedor.
+            </p>
+            
+            <div class="room-features">
+              <div class="feature">
+                <i class="fas fa-ruler-combined"></i>
+                <span>200 m²</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-bed"></i>
+                <span>Cama King Size</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-users"></i>
+                <span>Hasta 4 personas</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-mountain"></i>
+                <span>Vista al océano</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-concierge-bell"></i>
+                <span>Mayordomo personal</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-hot-tub"></i>
+                <span>Jacuzzi privado</span>
+              </div>
+            </div>
+            
+            <div class="room-details">
+              <h4 class="details-title">Detalles de la Suite</h4>
+              
+              <div class="details-grid">
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-bed"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Dormitorio Principal</h4>
+                    <p>Cama King Size con ropa de cama de 1000 hilos, selección de almohadas premium y vestidor independiente.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-bath"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Baño de Mármol</h4>
+                    <p>Bañera de hidromasaje, ducha de efecto lluvia, productos de baño de lujo y albornoces de algodón egipcio.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-couch"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Sala de Estar</h4>
+                    <p>Amplio salón con sofás de diseño, sistema de entretenimiento de última generación y bar privado.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-utensils"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Comedor Privado</h4>
+                    <p>Mesa para 8 comensales con posibilidad de servicio de chef privado para cenas exclusivas.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Suite Ejecutiva -->
+        <div class="room-card fade-in delay-1">
+          <div class="room-image-container">
+            <img src="https://placehold.co/1000x600/blue/white" alt="Suite Ejecutiva" class="room-image">
+            <div class="room-badge">Suite Ejecutiva</div>
+          </div>
+          
+          <div class="room-content">
+            <h3 class="room-title">Suite Ejecutiva Skyline</h3>
+            <div class="room-price">
+              $550 <span class="price-period">por noche</span>
+            </div>
+            
+            <p class="room-description">
+              La Suite Ejecutiva Skyline combina funcionalidad y elegancia para el viajero de negocios exigente. Con 120 m² de espacio, incluye una zona de trabajo equipada con la última tecnología, sala de reuniones privada y vistas espectaculares de la ciudad. El diseño minimalista y sofisticado crea un ambiente perfecto para trabajar y descansar.
+            </p>
+            
+            <div class="room-features">
+              <div class="feature">
+                <i class="fas fa-ruler-combined"></i>
+                <span>120 m²</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-bed"></i>
+                <span>Cama King Size</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-users"></i>
+                <span>Hasta 2 personas</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-city"></i>
+                <span>Vista a la ciudad</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-briefcase"></i>
+                <span>Área de trabajo</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-wifi"></i>
+                <span>Wi-Fi de alta velocidad</span>
+              </div>
+            </div>
+            
+            <div class="room-details">
+              <h4 class="details-title">Detalles de la Suite</h4>
+              
+              <div class="details-grid">
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-bed"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Dormitorio</h4>
+                    <p>Cama King Size con sistema de descanso ergonómico, cortinas blackout automatizadas y sistema de sonido envolvente.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-laptop"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Oficina Privada</h4>
+                    <p>Escritorio ergonómico, silla ejecutiva, impresora multifunción y conexiones para videoconferencias.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Sala de Reuniones</h4>
+                    <p>Espacio para 6 personas con pantalla interactiva, sistema de videoconferencia y servicio de catering disponible.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-concierge-bell"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Servicios Ejecutivos</h4>
+                    <p>Asistente personal, servicio de planchado express y desayuno ejecutivo incluido.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Habitación Deluxe -->
+        <div class="room-card fade-in delay-2">
+          <div class="room-image-container">
+            <img src="https://placehold.co/1000x600/blue/white" alt="Habitación Deluxe" class="room-image">
+            <div class="room-badge">Habitación Deluxe</div>
+          </div>
+          
+          <div class="room-content">
+            <h3 class="room-title">Habitación Deluxe Ocean View</h3>
+            <div class="room-price">
+              $350 <span class="price-period">por noche</span>
+            </div>
+            
+            <p class="room-description">
+              Nuestras habitaciones Deluxe Ocean View ofrecen 60 m² de elegancia y confort con impresionantes vistas al océano. El diseño contemporáneo se complementa con elementos naturales y una paleta de colores inspirada en el mar. Cada habitación cuenta con un balcón privado donde podrá disfrutar del espectacular amanecer o atardecer sobre el océano.
+            </p>
+            
+            <div class="room-features">
+              <div class="feature">
+                <i class="fas fa-ruler-combined"></i>
+                <span>60 m²</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-bed"></i>
+                <span>Cama Queen Size</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-users"></i>
+                <span>Hasta 2 personas</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-water"></i>
+                <span>Vista al océano</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-umbrella-beach"></i>
+                <span>Balcón privado</span>
+              </div>
+              <div class="feature">
+                <i class="fas fa-shower"></i>
+                <span>Ducha de lluvia</span>
+              </div>
+            </div>
+            
+            <div class="room-details">
+              <h4 class="details-title">Detalles de la Habitación</h4>
+              
+              <div class="details-grid">
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-bed"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Área de Descanso</h4>
+                    <p>Cama Queen Size con colchón premium, selección de almohadas y ropa de cama de algodón egipcio.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-bath"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Baño Privado</h4>
+                    <p>Ducha de efecto lluvia, bañera independiente, productos de baño orgánicos y espejo con iluminación LED.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-tv"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Entretenimiento</h4>
+                    <p>Smart TV de 55", sistema de sonido Bluetooth y selección de películas a la carta.</p>
+                  </div>
+                </div>
+                
+                <div class="detail-item">
+                  <div class="detail-icon">
+                    <i class="fas fa-coffee"></i>
+                  </div>
+                  <div class="detail-content">
+                    <h4>Minibar y Café</h4>
+                    <p>Minibar completo, máquina de café espresso y selección de tés premium.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; <span id="current-year">2025</span> Horizon Prime Hotel. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Set current year in footer
+    document.getElementById("current-year").textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
+    const mobileMenuCloseBtn = document.querySelector(".mobile-nav-close");
+    const mobileNav = document.querySelector(".mobile-nav");
+
+    mobileMenuBtn.addEventListener("click", function() {
+      mobileNav.classList.add("active");
+      document.body.style.overflow = "hidden";
+    });
+
+    mobileMenuCloseBtn.addEventListener("click", function() {
+      mobileNav.classList.remove("active");
+      document.body.style.overflow = "";
+    });
+
+    // Category tabs functionality
+    const categoryTabs = document.querySelectorAll(".category-tab");
+    
+    categoryTabs.forEach(tab => {
+      tab.addEventListener("click", function() {
+        // Remove active class from all tabs
+        categoryTabs.forEach(t => t.classList.remove("active"));
+        
+        // Add active class to clicked tab
+        this.classList.add("active");
+        
+        // Here you would normally filter the rooms based on the selected category
+        // For this demo, we'll just log the selected category
+        console.log("Selected category: " + this.textContent);
+      });
+    });
+
+    // Animation on scroll
+    document.addEventListener("DOMContentLoaded", function() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      
+      // Trigger animations immediately for elements in viewport
+      fadeElements.forEach(element => {
+        element.style.opacity = "1";
+      });
+    });
+  </script>
+</body>
+</html>
