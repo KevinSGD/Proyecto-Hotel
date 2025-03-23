@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Hotel</title>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f9fafb;
+            color: #1f2937;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .page-container {
+            width: 100%;
+            padding: 30px;
+        }
+
+        /* .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+        }*/
+        .container {
+            width: 80%;
+            /* Ajusta el ancho para que no ocupe toda la pantalla */
+            max-width: 600px;
+            /* Evita que se expanda demasiado */
+            margin: 0 auto;
+            /* Centra el contenedor */
+            background-color: white;
+            padding: 40px;
+            /* Margen interno uniforme */
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            /* Espaciado uniforme entre elementos */
+        }
+
+        input,
+        select {
+            width: 100%;
+            /* Hace que los inputs ocupen todo el ancho del container */
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .dates-container {
+            display: flex;
+            justify-content: space-between;
+            /* Distribuye los elementos equitativamente */
+            gap: 15px;
+            /* Espacio entre fecha de entrada y salida */
+        }
+
+        .dates-container input {
+            flex: 1;
+            /* Permite que ambos inputs de fecha crezcan proporcionalmente */
+        }
+
+        .button {
+            width: 80%;
+            /* Asegura que el botón ocupe el mismo ancho */
+            padding: 15px;
+            background-color: #1E40AF;
+            /* Azul fuerte */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                /* Se expande más en pantallas pequeñas */
+            }
+
+            .dates-container {
+                flex-direction: column;
+                /* Hace que los inputs de fecha se apilen en móviles */
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            font-size: 1.75rem;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .subtitle {
+            color: #6b7280;
+            font-size: 1rem;
+            margin-top: 8px;
+        }
+
+        form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: grid;
+            gap: 8px;
+        }
+
+        label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: #374151;
+        }
+
+        input,
+        select {
+            width: 95%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
+
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+        }
+
+        input[readonly] {
+            background-color: #f3f4f6;
+        }
+
+        .submit-btn {
+            background-color: #1e40af;
+            color: white;
+            border: none;
+            border-radius: 0.375rem;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 7px;
+        }
+
+        .submit-btn:hover {
+            background-color: #1e3a8a;
+        }
+
+        .dates-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-container">
+        <div class="container">
+            <div class="header">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"></path>
+                        <path d="m9 16 .348-.24c1.465-1.013 3.84-1.013 5.304 0L15 16"></path>
+                        <path d="M8 7h.01"></path>
+                        <path d="M16 7h.01"></path>
+                        <path d="M12 7h.01"></path>
+                        <path d="M12 11h.01"></path>
+                        <path d="M16 11h.01"></path>
+                        <path d="M8 11h.01"></path>
+                        <path d="M10 22v-6.5m4 0V22"></path>
+                    </svg>
+                </div>
+                <h1>Formulario de Reserva</h1>
+                <p class="subtitle">Complete los datos para confirmar su reservación</p>
+            </div>
+
+            <form action="GuardarReservas.php" method="post">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+
+                <div class="dates-container">
+                    <div class="form-group">
+                        <label for="fecha-entrada">Fecha de entrada:</label>
+                        <input type="date" id="fecha-entrada" name="fecha-entrada" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha-salida">Fecha de salida:</label>
+                        <input type="date" id="fecha-salida" name="fecha-salida" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="huespedes">Número de huéspedes:</label>
+                    <select id="huespedes" name="huespedes" required>
+                        <option value="">Seleccione</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo-habitacion">Tipo de habitación:</label>
+                    <select id="tipo-habitacion" name="tipo-habitacion" required>
+                        <option value="">Seleccione</option>
+                        <option value="1">Habitación Estandar</option>
+                        <option value="2">Habitación Premium</option>
+                        <option value="3">Habitación Delux</option>
+                        <option value="4">habitación Suite Delux </option>
+                    </select>
+
+                </div>
+
+                <button type="submit" class="submit-btn">Realizar Reserva</button>
+            </form>
+
+            <div class="footer">
+                Sistema de Administración Hotelera © 2024
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Obtener el tipo de habitación de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomType = urlParams.get('tipo-habitacion');
+
+        if (roomType) {
+            document.getElementById('tipo-habitacion').value = roomType;
+        }
+
+        // Establecer fechas mínimas para entrada y salida
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const formatDate = (date) => {
+            return date.toISOString().split('T')[0];
+        };
+
+        document.getElementById('fecha-entrada').min = formatDate(today);
+        document.getElementById('fecha-salida').min = formatDate(tomorrow);
+
+        // Actualizar fecha mínima de salida cuando cambia la fecha de entrada
+        document.getElementById('fecha-entrada').addEventListener('change', function () {
+            const entryDate = new Date(this.value);
+            const nextDay = new Date(entryDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+
+            document.getElementById('fecha-salida').min = formatDate(nextDay);
+
+            // Si la fecha de salida es anterior a la nueva fecha mínima, actualizarla
+            const currentExitDate = new Date(document.getElementById('fecha-salida').value);
+            if (currentExitDate <= entryDate) {
+                document.getElementById('fecha-salida').value = formatDate(nextDay);
+            }
+        });
+    </script>
+</body>
+
+</html>
