@@ -24,17 +24,15 @@ document.addEventListener("DOMContentLoaded", () => {
           }
       });
   });
+  const LoginBtn = document.getElementById("Login-btn");
 
-  // Botones de reserva de habitaciones
-  const botonesReservarHabitacion = document.querySelectorAll(".room-card .btn-primary");
-
-  botonesReservarHabitacion.forEach((boton) => {
-      boton.addEventListener("click", (e) => {
-          e.preventDefault();
-          window.location.href = "../Reservas/form.html"; // Cambia "booking.html" por la página deseada
+  if (LoginBtn) {
+      LoginBtn.addEventListener("click", function () {
+          // Redirigir a la interfaz de Login de usuarios
+          window.location.href = "../Reservas/form.html";
       });
-  });
-
+  }
+ 
   // Botones de reserva de servicios
   const botonesReservarServicio = document.querySelectorAll(".service-card .btn-primary");
 
