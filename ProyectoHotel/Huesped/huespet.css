@@ -546,20 +546,7 @@
     background-color: var(--primary);
     color: var(--white);
     border-radius: 8px;
-  }
-  
-  .date-box .month {
-    font-size: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-  }
-  
-  .date-box .day {
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1;
-  }
-  
+  }  
   .duration {
     display: flex;
     flex-direction: column;
