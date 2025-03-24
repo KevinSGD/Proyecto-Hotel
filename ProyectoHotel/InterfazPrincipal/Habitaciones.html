@@ -71,6 +71,60 @@
 
     }
 
+    .button-container {
+      text-align: center;
+      margin: 40px 0 60px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(to right, var(--primary-dark), var(--primary));
+      color: var(--white);
+      border: none;
+      border-radius: 30px;
+      padding: 15px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px rgba(30, 64, 175, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-primary::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: 0.5s;
+    }
+
+    .btn-primary:hover::after {
+      left: 100%;
+    }
+
+    .price-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: var(--primary-dark);
+      color: var(--white);
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      box-shadow: var(--shadow);
+      z-index: 1;
+    }
+
     .logo {
       width: 40px;
       height: 40px;
@@ -824,6 +878,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="button-container fade-in">
+        <button class="btn-primary" onclick="window.location.href='../RegistroClientes/RegistroUsuarios.html'">Reservar ahora</button>
       </div>
     </div>
   </section>
