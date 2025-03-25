@@ -780,48 +780,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   </style>
 </head>
-<body>
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="logo-container">
-        <div class="logo">H</div>
-        <span class="logo-text">Horizon Prime</span>
-      </a>
-      
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Inicio</a>
-        <a href="habitaciones.html" class="nav-link">Habitaciones</a>
-        <a href="servicios.html" class="nav-link">Servicios</a>
-      </div>
-      
-      <a href="login.html" class="login-btn">Inicio Sesión</a>
-      
-      <button class="mobile-menu-btn">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </nav>
-  
-  <!-- Mobile Navigation -->
-  <div class="mobile-nav">
-    <div class="mobile-nav-header">
-      <div class="logo-container">
-        <div class="logo">H</div>
-        <span class="logo-text">Horizon Prime</span>
-      </div>
-      <button class="mobile-nav-close">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    
-    <div class="mobile-nav-links">
-      <a href="index.html" class="mobile-nav-link">Inicio</a>
-      <a href="habitaciones.html" class="mobile-nav-link">Habitaciones</a>
-      <a href="servicios.html" class="mobile-nav-link">Servicios</a>
-      <a href="login.html" class="mobile-nav-link">Inicio Sesión</a>
-    </div>
-  </div>
 
   <!-- Page Header -->
   <header class="page-header">
