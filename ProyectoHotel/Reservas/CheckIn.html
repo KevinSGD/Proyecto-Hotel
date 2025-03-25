@@ -189,10 +189,14 @@
     }
 
     .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       gap: 15px;
     }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
 
     /* Selected Services */
     .selected-services {
@@ -214,15 +218,7 @@
     }
 
     .service-icon {
-      width: 36px;
-      height: 36px;
-      background-color: var(--primary-lighter);
-      color: var(--primary-dark);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-right: 12px;
+      display: none;
     }
 
     .service-details {
@@ -262,9 +258,7 @@
     }
 
     .room-image {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
+      display: none;
     }
 
     .room-details {
@@ -429,22 +423,6 @@
 </head>
 
 <body>
-  <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="container nav-container">
-      <a href="index.html" class="logo-container">
-        <div class="logo">H</div>
-        <span class="logo-text">Horizon Prime</span>
-      </a>
-
-      <div class="nav-links">
-        <a href="index.html" class="nav-link">Inicio</a>
-        <a href="habitaciones.html" class="nav-link">Habitaciones</a>
-        <a href="servicios.html" class="nav-link">Servicios</a>
-      </div>
-    </div>
-  </nav>
-
   <!-- Page Header -->
   <header class="page-header">
     <div class="container">
@@ -466,13 +444,8 @@
             <form id="checkout-form">
               <div class="form-row">
                 <div class="form-group">
-                  <label for="first-name">Nombre</label>
+                  <label for="first-name">Nombre Completo</label>
                   <input type="text" id="first-name" class="form-control" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="last-name">Apellidos</label>
-                  <input type="text" id="last-name" class="form-control" required>
                 </div>
               </div>
 
@@ -523,7 +496,7 @@
               </div>
 
               <div class="btn-group">
-                <a href="servicios.html" class="btn btn-outline">Volver a servicios</a>
+                <a href="../Reservas/ServiciosExtra.html" class="btn btn-outline">Volver a servicios</a>
                 <button type="submit" class="btn btn-primary">Confirmar Reserva</button>
               </div>
             </form>
@@ -557,7 +530,7 @@
             <div class="price-summary">
               <div class="price-row">
                 <div class="price-label">Habitación</div>
-                <div class="price-value" id="room-price">$1,750.00</div>
+                <div class="price-value" id="room-price">$1,750.0 0</div>
               </div>
 
               <div class="price-row">
@@ -589,6 +562,23 @@
   </footer>
 
   <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      fetch("reservas.php")
+        .then(response => response.json())
+        .then(data => {
+          if (!data.error) {
+            document.getElementById("first-name").value = data.nombre;
+            document.getElementById("email").value = data.email;
+            document.getElementById("phone").value = data.telefono;
+            document.getElementById("arrival-date").value = data.fecha_entrada;
+            document.getElementById("departure-date").value = data.fecha_salida;
+          } else {
+            console.error("No se encontraron reservas");
+          }
+        })
+        .catch(error => console.error("Error:", error));
+    });
+
     // Set current year in footer
     document.getElementById("current-year").textContent = new Date().getFullYear();
 
@@ -636,6 +626,8 @@
         totalServicesPrice += priceNumber;
 
         // Crear un elemento de lista para cada servicio
+        const serviceItem = document.createElement('li');
+        serviceItem.className = 'service-item';
         serviceItem.innerHTML = `
   <div class="service-details">
     <div class="service-name">${service.title}</div>

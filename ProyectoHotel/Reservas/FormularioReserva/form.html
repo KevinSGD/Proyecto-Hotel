@@ -82,6 +82,7 @@
                 </div>
 
                 <div class="form-group">
+                    <input type="hidden" id="tipo-habitacion-hidden" name="tipo-habitacion-hidden">
                     <label for="tipo-habitacion">Tipo de habitación:</label>
                     <select id="tipo-habitacion" name="tipo-habitacion" required>
                         <option value="">Seleccione</option>
@@ -90,6 +91,7 @@
                         <option value="3">Habitación Delux</option>
                         <option value="4">habitación Suite Delux </option>
                     </select>
+
 
                 </div>
 
@@ -103,13 +105,10 @@
     </div>
 
     <script>
-        // Obtener el tipo de habitación de la URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const roomType = urlParams.get('tipo-habitacion');
-
-        if (roomType) {
-            document.getElementById('tipo-habitacion').value = roomType;
-        }
+        document.querySelector('form').addEventListener('submit', function () {
+            const selectedRoomType = document.getElementById('tipo-habitacion').value;
+            document.getElementById('tipo-habitacion-hidden').value = selectedRoomType;
+        });
 
         // Establecer fechas mínimas para entrada y salida
         const today = new Date();
