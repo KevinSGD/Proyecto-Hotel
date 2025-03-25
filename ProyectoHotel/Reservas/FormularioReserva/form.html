@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserva de Hotel</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+    <!-- Barra de navegación -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <a href="../InterfazPrincipal/Interfaz.html" class="logo">
+                <div class="logo-circle">H</div>
+                Horizon Prime
+            </a>
+        </div>
+
+        <!-- Espacio vacío para mantener el equilibrio en el diseño -->
+        <div style="width: 150px;"></div>
+    </nav>
+    <div class="page-container">
+        <div class="container">
+            <div class="header">
+                <div class="logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+                        stroke="#1e3a8a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"></path>
+                        <path d="m9 16 .348-.24c1.465-1.013 3.84-1.013 5.304 0L15 16"></path>
+                        <path d="M8 7h.01"></path>
+                        <path d="M16 7h.01"></path>
+                        <path d="M12 7h.01"></path>
+                        <path d="M12 11h.01"></path>
+                        <path d="M16 11h.01"></path>
+                        <path d="M8 11h.01"></path>
+                        <path d="M10 22v-6.5m4 0V22"></path>
+                    </svg>
+                </div>
+                <h1>Formulario de Reserva</h1>
+                <p class="subtitle">Complete los datos para confirmar su reservación</p>
+            </div>
+
+            <form action="GuardarReservas.php" method="post">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+
+                <div class="dates-container">
+                    <div class="form-group">
+                        <label for="fecha-entrada">Fecha de entrada:</label>
+                        <input type="date" id="fecha-entrada" name="fecha-entrada" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha-salida">Fecha de salida:</label>
+                        <input type="date" id="fecha-salida" name="fecha-salida" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="huespedes">Número de huéspedes:</label>
+                    <select id="huespedes" name="huespedes" required>
+                        <option value="">Seleccione</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="tipo-habitacion">Tipo de habitación:</label>
+                    <select id="tipo-habitacion" name="tipo-habitacion" required>
+                        <option value="">Seleccione</option>
+                        <option value="1">Habitación Estandar</option>
+                        <option value="2">Habitación Premium</option>
+                        <option value="3">Habitación Delux</option>
+                        <option value="4">habitación Suite Delux </option>
+                    </select>
+
+                </div>
+
+                <button type="submit" class="submit-btn">Realizar Reserva</button>
+            </form>
+
+            <div class="footer">
+                Sistema de Administración Hotelera © 2025
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Obtener el tipo de habitación de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const roomType = urlParams.get('tipo-habitacion');
+
+        if (roomType) {
+            document.getElementById('tipo-habitacion').value = roomType;
+        }
+
+        // Establecer fechas mínimas para entrada y salida
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+
+        const formatDate = (date) => {
+            return date.toISOString().split('T')[0];
+        };
+
+        document.getElementById('fecha-entrada').min = formatDate(today);
+        document.getElementById('fecha-salida').min = formatDate(tomorrow);
+
+        // Actualizar fecha mínima de salida cuando cambia la fecha de entrada
+        document.getElementById('fecha-entrada').addEventListener('change', function () {
+            const entryDate = new Date(this.value);
+            const nextDay = new Date(entryDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+
+            document.getElementById('fecha-salida').min = formatDate(nextDay);
+
+            // Si la fecha de salida es anterior a la nueva fecha mínima, actualizarla
+            const currentExitDate = new Date(document.getElementById('fecha-salida').value);
+            if (currentExitDate <= entryDate) {
+                document.getElementById('fecha-salida').value = formatDate(nextDay);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (LoginBtn) {
       LoginBtn.addEventListener("click", function () {
           // Redirigir a la interfaz de Login de usuarios
-          window.location.href = "../Reservas/form.html";
+          window.location.href = "../Reservas/FormularioReserva/form.html";
       });
   }
  
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   botonesReservarServicio.forEach((boton) => {
       boton.addEventListener("click", (e) => {
           e.preventDefault();
-          window.location.href = "../Reservas/form.html"; // Cambia "service-booking.html" por la página deseada
+          window.location.href = "../Reservas/FormularioReserva/form.html"; // Cambia "service-booking.html" por la página deseada
       });
   });
 
