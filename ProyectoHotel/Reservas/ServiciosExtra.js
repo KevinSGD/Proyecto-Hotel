@@ -26,7 +26,23 @@ document.addEventListener("DOMContentLoaded", function () {
   // Verificar selección al presionar el botón
   const finalizarBtn = document.querySelector(".btn-primary");
   finalizarBtn.addEventListener("click", function () {
-    const selectedServices = document.querySelectorAll('input[type="checkbox"]:checked');
+    const selectedServices = [];
+
+    checkboxes.forEach(checkbox => {
+      if (checkbox.checked) {
+        const serviceCard = checkbox.closest(".service-card");
+        const title = serviceCard.querySelector(".service-title").textContent.trim();
+        const price = serviceCard.querySelector(".price-tag").textContent.trim();
+        const imageSrc = serviceCard.querySelector(".service-image img").src;
+
+        selectedServices.push({
+          title: title,
+          price: price,
+          image: imageSrc
+        });
+      }
+    });
+
 
     if (selectedServices.length === 0) {
       const confirmacion = confirm("No ha seleccionado ningún servicio extra. ¿Desea continuar sin servicios?");
@@ -35,8 +51,10 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // Si hay servicios seleccionados o el usuario confirma, proceder con el check-in
-    alert("Procediendo al Check-in...");
+    // Guardar en localStorage
+    localStorage.setItem("selectedServices", JSON.stringify(selectedServices));
+
+    // Redirigir a la nueva página de resumen de servicios
     window.location.href = "../Reservas/CheckIn.html";
   });
 });

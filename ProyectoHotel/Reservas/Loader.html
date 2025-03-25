@@ -1,196 +1,982 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página de Espera</title>
-  <style>/* Estilos generales */
-    body, html {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f3f3f3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Horizon Prime Hotel - Procesando</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #1e40af;
+    --primary-dark: #1e3a8a;
+    --primary-light: #3b82f6;
+    --primary-lighter: #93c5fd;
+    --white: #ffffff;
+    --light: #f1f5f9;
+    --light-blue: #e0f2fe;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    overflow: hidden;
+  }
+
+  .loader-container {
+    text-align: center;
+    padding: 40px;
+    border-radius: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    width: 400px;
+    position: relative;
+    z-index: 10;
+  }
+
+  .hotel-logo {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo-circle {
+    width: 60px;
+    height: 60px;
+    background-color: var(--white);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 28px;
+    margin-right: 15px;
+  }
+
+  .logo-text {
+    font-size: 24px;
+    font-weight: 700;
+  }
+
+  .loader-message {
+    font-size: 20px;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+
+  .progress-container {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    margin-top: 30px;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--white);
+    border-radius: 3px;
+    transition: width 0.1s linear;
+  }
+
+  .loader-info {
+    margin-top: 15px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  /* Particles animation */
+  .particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+  }
+
+  /* The 3D dots loader */
+  .loader-wrapper {
+    height: 200px;
+    position: relative;
+    margin: 0 auto 30px;
+  }
+
+  /* The loader */
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    width: 160px;
+    height: 160px;
+    margin-top: -80px;
+    margin-left: -80px;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  /* The dots */
+  .dots {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    perspective: 200px;
+    transform-style: preserve-3d;
+    animation: dots 10000ms linear infinite;
+  }
+
+  .dots:nth-child(1) {
+    animation-name: dots;
+  }
+
+  .dots:nth-child(2) {
+    animation-name: dots2;
+  }
+
+  .dots:nth-child(3) {
+    animation-name: dots3;
+  }
+
+  .dots:nth-child(4) {
+    animation-name: dots4;
+  }
+
+  .dots:nth-child(5) {
+    animation-name: dots5;
+  }
+
+  .dots:nth-child(6) {
+    animation-name: dots6;
+  }
+
+  @keyframes dots {
+    0% {
+      transform: rotateX(30deg) rotateZ(0deg) translateZ(-50px);
+    }
+
+    50% {
+      transform: rotateX(60deg) rotateZ(5760deg) translateZ(-100px);
+    }
+
+    100% {
+      transform: rotateX(30deg) rotateZ(11520deg) translateZ(-50px);
+    }
+  }
+
+  @keyframes dots2 {
+    0% {
+      transform: rotateX(30deg) rotateZ(0deg) translateZ(-36px);
+    }
+
+    50% {
+      transform: rotateX(60deg) rotateZ(2880deg) translateZ(-72px);
+    }
+
+    100% {
+      transform: rotateX(30deg) rotateZ(5760deg) translateZ(-36px);
+    }
+  }
+
+  @keyframes dots3 {
+    0% {
+      transform: rotateX(30deg) rotateZ(0deg) translateZ(-24px);
+    }
+
+    50% {
+      transform: rotateX(60deg) rotateZ(1440deg) translateZ(-48px);
+    }
+
+    100% {
+      transform: rotateX(30deg) rotateZ(2880deg) translateZ(-24px);
+    }
+  }
+
+  @keyframes dots4 {
+    0% {
+      transform: rotateX(30deg) rotateZ(0deg) translateZ(-14px);
+    }
+
+    50% {
+      transform: rotateX(60deg) rotateZ(720deg) translateZ(-28px);
+    }
+
+    100% {
+      transform: rotateX(30deg) rotateZ(1440deg) translateZ(-14px);
+    }
+  }
+
+  @keyframes dots5 {
+    0% {
+      transform: rotateX(30deg) rotateZ(0deg) translateZ(-6px);
+    }
+
+    50% {
+      transform: rotateX(60deg) rotateZ(360deg) translateZ(-12px);
+    }
+
+    100% {
+      transform: rotateX(30deg) rotateZ(720deg) translateZ(-6px);
+    }
+  }
+
+  @keyframes dots6 {
+    0% {
+      transform: rotateX(30deg) rotateZ(0deg) translateZ(0px);
+    }
+
+    50% {
+      transform: rotateX(60deg) rotateZ(180deg) translateZ(-3px);
+    }
+
+    100% {
+      transform: rotateX(30deg) rotateZ(360deg) translateZ(0px);
+    }
+  }
+
+  /* The dot */
+  .dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    margin-top: -4px;
+    border-radius: 100px;
+    background-color: var(--white);
+    transform-style: preserve-3d;
+    transform: rotateZ(0) translateY(0);
+  }
+
+  .dots:nth-child(6) .dot {
+    background-color: var(--primary-lighter);
+  }
+
+  .dots:nth-child(1) .dot:nth-child(1) {
+    transform: rotateZ(0) translateY(-10px);
+  }
+
+  .dots:nth-child(1) .dot:nth-child(2) {
+    transform: rotateZ(90deg) translateY(-10px) translateZ(-140px);
+  }
+
+  .dots:nth-child(1) .dot:nth-child(3) {
+    transform: rotateZ(180deg) translateY(-10px);
+  }
+
+  .dots:nth-child(1) .dot:nth-child(4) {
+    transform: rotateZ(270deg) translateY(-10px) translateZ(-140px);
+  }
+
+  .dots:nth-child(5) .dot {
+    background-color: var(--primary-lighter);
+  }
+
+  .dots:nth-child(2) .dot:nth-child(1) {
+    transform: rotateZ(0) translateY(-22px);
+  }
+
+  .dots:nth-child(2) .dot:nth-child(2) {
+    transform: rotateZ(45deg) translateY(-22px) translateZ(-120px);
+  }
+
+  .dots:nth-child(2) .dot:nth-child(3) {
+    transform: rotateZ(90deg) translateY(-22px);
+  }
+
+  .dots:nth-child(2) .dot:nth-child(4) {
+    transform: rotateZ(135deg) translateY(-22px) translateZ(-120px);
+  }
+
+  .dots:nth-child(2) .dot:nth-child(5) {
+    transform: rotateZ(180deg) translateY(-22px);
+  }
+
+  .dots:nth-child(2) .dot:nth-child(6) {
+    transform: rotateZ(225deg) translateY(-22px) translateZ(-120px);
+  }
+
+  .dots:nth-child(2) .dot:nth-child(7) {
+    transform: rotateZ(270deg) translateY(-22px);
+  }
+
+  .dots:nth-child(2) .dot:nth-child(8) {
+    transform: rotateZ(315deg) translateY(-22px) translateZ(-120px);
+  }
+
+  .dots:nth-child(4) .dot {
+    background-color: var(--white);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(1) {
+    transform: rotateZ(0) translateY(-34px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(2) {
+    transform: rotateZ(30deg) translateY(-34px) translateZ(-100px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(3) {
+    transform: rotateZ(60deg) translateY(-34px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(4) {
+    transform: rotateZ(90deg) translateY(-34px) translateZ(-100px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(5) {
+    transform: rotateZ(120deg) translateY(-34px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(6) {
+    transform: rotateZ(150deg) translateY(-34px) translateZ(-100px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(7) {
+    transform: rotateZ(180deg) translateY(-34px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(8) {
+    transform: rotateZ(210deg) translateY(-34px) translateZ(-100px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(9) {
+    transform: rotateZ(240deg) translateY(-34px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(10) {
+    transform: rotateZ(270deg) translateY(-34px) translateZ(-100px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(11) {
+    transform: rotateZ(300deg) translateY(-34px);
+  }
+
+  .dots:nth-child(3) .dot:nth-child(12) {
+    transform: rotateZ(330deg) translateY(-34px) translateZ(-100px);
+  }
+
+  .dots:nth-child(3) .dot {
+    background-color: var(--primary-lighter);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(1) {
+    transform: rotateZ(0) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(2) {
+    transform: rotateZ(20deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(3) {
+    transform: rotateZ(40deg) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(4) {
+    transform: rotateZ(60deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(5) {
+    transform: rotateZ(80deg) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(6) {
+    transform: rotateZ(100deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(7) {
+    transform: rotateZ(120deg) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(8) {
+    transform: rotateZ(140deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(9) {
+    transform: rotateZ(160deg) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(10) {
+    transform: rotateZ(180deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(11) {
+    transform: rotateZ(200deg) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(12) {
+    transform: rotateZ(220deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(13) {
+    transform: rotateZ(240deg) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(14) {
+    transform: rotateZ(260deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(15) {
+    transform: rotateZ(280deg) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(16) {
+    transform: rotateZ(300deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(17) {
+    transform: rotateZ(320deg) translateY(-46px);
+  }
+
+  .dots:nth-child(4) .dot:nth-child(18) {
+    transform: rotateZ(340deg) translateY(-46px) translateZ(-80px);
+  }
+
+  .dots:nth-child(2) .dot {
+    background-color: var(--white);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(1) {
+    transform: rotateZ(0) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(2) {
+    transform: rotateZ(15deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(3) {
+    transform: rotateZ(30deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(4) {
+    transform: rotateZ(45deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(5) {
+    transform: rotateZ(60deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(6) {
+    transform: rotateZ(75deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(7) {
+    transform: rotateZ(90deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(8) {
+    transform: rotateZ(105deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(9) {
+    transform: rotateZ(120deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(10) {
+    transform: rotateZ(135deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(11) {
+    transform: rotateZ(150deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(12) {
+    transform: rotateZ(165deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(13) {
+    transform: rotateZ(180deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(14) {
+    transform: rotateZ(195deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(15) {
+    transform: rotateZ(210deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(16) {
+    transform: rotateZ(225deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(17) {
+    transform: rotateZ(240deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(18) {
+    transform: rotateZ(255deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(19) {
+    transform: rotateZ(270deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(20) {
+    transform: rotateZ(285deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(21) {
+    transform: rotateZ(300deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(22) {
+    transform: rotateZ(315deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(23) {
+    transform: rotateZ(330deg) translateY(-58px);
+  }
+
+  .dots:nth-child(5) .dot:nth-child(24) {
+    transform: rotateZ(345deg) translateY(-58px) translateZ(-40px);
+  }
+
+  .dots:nth-child(1) .dot {
+    background-color: var(--white);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(1) {
+    transform: rotateZ(0deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(2) {
+    transform: rotateZ(10deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(3) {
+    transform: rotateZ(20deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(4) {
+    transform: rotateZ(30deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(5) {
+    transform: rotateZ(40deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(6) {
+    transform: rotateZ(50deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(7) {
+    transform: rotateZ(60deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(8) {
+    transform: rotateZ(70deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(9) {
+    transform: rotateZ(80deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(10) {
+    transform: rotateZ(90deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(11) {
+    transform: rotateZ(100deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(12) {
+    transform: rotateZ(110deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(13) {
+    transform: rotateZ(120deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(14) {
+    transform: rotateZ(130deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(15) {
+    transform: rotateZ(140deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(16) {
+    transform: rotateZ(150deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(17) {
+    transform: rotateZ(160deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(18) {
+    transform: rotateZ(170deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(19) {
+    transform: rotateZ(180deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(20) {
+    transform: rotateZ(190deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(21) {
+    transform: rotateZ(200deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(22) {
+    transform: rotateZ(210deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(23) {
+    transform: rotateZ(220deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(24) {
+    transform: rotateZ(230deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(25) {
+    transform: rotateZ(240deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(26) {
+    transform: rotateZ(250deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(27) {
+    transform: rotateZ(260deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(28) {
+    transform: rotateZ(270deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(29) {
+    transform: rotateZ(280deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(30) {
+    transform: rotateZ(290deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(31) {
+    transform: rotateZ(300deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(32) {
+    transform: rotateZ(310deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(33) {
+    transform: rotateZ(320deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(34) {
+    transform: rotateZ(330deg) translateY(-70px) translateZ(-20px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(35) {
+    transform: rotateZ(340deg) translateY(-70px);
+  }
+
+  .dots:nth-child(6) .dot:nth-child(36) {
+    transform: rotateZ(350deg) translateY(-70px) translateZ(-20px);
+  }
+
+  @media (max-width: 480px) {
+    .loader-container {
+      padding: 30px 20px;
+    }
+
+    .logo-circle {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+    }
+
+    .logo-text {
+      font-size: 20px;
+    }
+
+    .loader-message {
+      font-size: 18px;
     }
     
-    .flex-container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .loader {
+      transform: scale(0.8);
     }
-    
-    .content {
-      background: #fff;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      text-align: center;
-    }
-    
-    .hidden {
-      display: none;
-    }
-    
-    .text-center {
-      text-align: center;
-    }
-    
-    .title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1rem;
-    }
-    
-    .subtitle {
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 2rem;
-    }
-    
-    /* Centrado de spinner */
-    .spinner-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 1rem;
-    }
-    
-    /* Spinner */
-    .pinwheel {
-      --uib-size: 45px;
-      --uib-speed: 0.8s;
-      --uib-color: #901a00;
-      --uib-line-weight: 4px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: var(--uib-size);
-      width: var(--uib-size);
-    }
-    
-    .pinwheel__line {
-      position: absolute;
-      top: calc(50% - var(--uib-line-weight) / 2);
-      left: 0;
-      height: var(--uib-line-weight);
-      width: 100%;
-      border-radius: calc(var(--uib-line-weight) / 2);
-      background-color: var(--uib-color);
-      animation: rotate81232 var(--uib-speed) ease-in-out infinite;
-    }
-    
-    .pinwheel__line:nth-child(2) {
-      animation-delay: calc(var(--uib-speed) * 0.075);
-      opacity: 0.8;
-    }
-    
-    .pinwheel__line:nth-child(3) {
-      animation-delay: calc(var(--uib-speed) * 0.15);
-      opacity: 0.6;
-    }
-    
-    .pinwheel__line:nth-child(4) {
-      animation-delay: calc(var(--uib-speed) * 0.225);
-      opacity: 0.4;
-    }
-    
-    .pinwheel__line:nth-child(5) {
-      animation-delay: calc(var(--uib-speed) * 0.3);
-      opacity: 0.2;
-    }
-    
-    .pinwheel__line:nth-child(6) {
-      animation-delay: calc(var(--uib-speed) * 0.375);
-      opacity: 0.1;
-    }
-    
-    @keyframes rotate81232 {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(180deg);
-      }
-    }
-    
-    /* Botón personalizado */
-    .custom-button {
-      border: none;
-      color: #fff;
-      background-image: linear-gradient(30deg, #901a00, #4ce3f7);
-      border-radius: 20px;
-      background-size: 100% auto;
-      font-family: inherit;
-      font-size: 17px;
-      padding: 0.6em 1.5em;
-      cursor: pointer;
-      transition: background-position 0.3s;
-    }
-    
-    .custom-button:hover {
-      background-position: right center;
-      background-size: 200% auto;
-      animation: pulse512 1.5s infinite;
-    }
-    
-    @keyframes pulse512 {
-      0% {
-        box-shadow: 0 0 0 0 #05bada66;
-      }
-      70% {
-        box-shadow: 0 0 0 10px rgb(218 103 68 / 0%);
-      }
-      100% {
-        box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
-      }
-    }
-    </style>
+  }
+</style>
 </head>
 <body>
-  <div id="app" class="flex-container">
-    <div class="content">
-      <div id="loading" class="text-center">
-        <h1 class="title">Esperando aprobación de la reserva</h1>
-        <p class="subtitle">Por favor, espere mientras procesamos su reserva...</p>
-        <div class="spinner-container">
-          <div class="pinwheel">
-            <div class="pinwheel__line"></div>
-            <div class="pinwheel__line"></div>
-            <div class="pinwheel__line"></div>
-            <div class="pinwheel__line"></div>
-            <div class="pinwheel__line"></div>
-            <div class="pinwheel__line"></div>
-          </div>
-        </div>
-      </div>
+  <!-- Particles background -->
+  <div class="particles" id="particles"></div>
 
-      <div id="ready" class="hidden text-center">                    
-        <h1 class="title">Reserva lista para aprobación</h1>
-        <p class="subtitle">Su reserva está lista para ser aprobada.</p>
-        <a href="ServiciosReserva.html">
-            <button class="custom-button">Continuar Proceso</button>
-        </a>
+  <div class="loader-container">
+    <div class="hotel-logo">
+      <div class="logo-circle">H</div>
+      <div class="logo-text">Horizon Prime</div>
     </div>
     
+    <div class="loader-message">Procesando datos</div>
+    
+    <!-- 3D Dots Loader -->
+    <div class="loader-wrapper">
+      <div class="loader">
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+        <div class="dots">
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+          <div class="dot"></div>
+        </div>
+      </div>
     </div>
+    
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    
+    <div class="loader-info">Por favor espere mientras preparamos su experiencia...</div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-  const loadingDiv = document.getElementById("loading");
-  const readyDiv = document.getElementById("ready");
-
-  // Cambiar el estado después de 10 segundos
-  setTimeout(() => {
-    loadingDiv.classList.add("hidden");
-    readyDiv.classList.remove("hidden");
-  }, 10000);
-});
-
+    // Create particles
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random position
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        
+        // Random size
+        const size = Math.random() * 4 + 2;
+        
+        // Random opacity
+        const opacity = Math.random() * 0.5 + 0.1;
+        
+        // Set styles
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.opacity = opacity;
+        
+        // Add to container
+        particlesContainer.appendChild(particle);
+        
+        // Animate particle
+        animateParticle(particle);
+      }
+    }
+    
+    function animateParticle(particle) {
+      // Random duration
+      const duration = Math.random() * 20 + 10;
+      
+      // Random direction
+      const directionX = Math.random() > 0.5 ? 1 : -1;
+      const directionY = Math.random() > 0.5 ? 1 : -1;
+      
+      // Random distance
+      const distanceX = Math.random() * 20 * directionX;
+      const distanceY = Math.random() * 20 * directionY;
+      
+      // Get current position
+      const currentX = parseFloat(particle.style.left);
+      const currentY = parseFloat(particle.style.top);
+      
+      // Set animation
+      particle.style.transition = `all ${duration}s linear`;
+      
+      setTimeout(() => {
+        particle.style.left = `${currentX + distanceX}%`;
+        particle.style.top = `${currentY + distanceY}%`;
+        
+        // Recursively animate
+        setTimeout(() => {
+          animateParticle(particle);
+        }, duration * 1000);
+      }, 100);
+    }
+    
+    // Update progress bar
+    function updateProgressBar() {
+      const progressBar = document.getElementById('progress-bar');
+      const totalTime = 6000; // 6 seconds
+      const interval = 60; // Update every 60ms
+      const steps = totalTime / interval;
+      let currentStep = 0;
+      
+      const progressInterval = setInterval(() => {
+        currentStep++;
+        const progress = (currentStep / steps) * 100;
+        progressBar.style.width = `${progress}%`;
+        
+        if (currentStep >= steps) {
+          clearInterval(progressInterval);
+          redirectToNextPage();
+        }
+      }, interval);
+    }
+    
+    // Redirect to next page
+    function redirectToNextPage() {
+      // Change 'servicios.html' to the page you want to redirect to
+      window.location.href = '../Reservas/ServiciosExtra.html';
+    }
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      createParticles();
+      updateProgressBar();
+      
+      // Add dots to "Procesando datos" message
+      const loaderMessage = document.querySelector('.loader-message');
+      let dots = 0;
+      
+      setInterval(() => {
+        dots = (dots + 1) % 4;
+        loaderMessage.textContent = `Procesando datos${'.'.repeat(dots)}`;
+      }, 500);
+    });
   </script>
 </body>
 </html>
+
