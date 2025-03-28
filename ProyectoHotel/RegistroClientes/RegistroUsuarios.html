@@ -75,14 +75,14 @@
     const form = document.getElementById('registroForm');
     const btnCancelar = document.getElementById('btnCancelar');
 
-    // Campos del formulario
+
     const nombre = document.getElementById('nombre');
     const apellido = document.getElementById('apellido');
     const email = document.getElementById('email');
     const password = document.getElementById('password');
     const confirmPassword = document.getElementById('confirmPassword');
 
-    // Mensajes de error
+
     const errores = {
         nombre: document.getElementById('nombreError'),
         apellido: document.getElementById('apellidoError'),
@@ -91,39 +91,39 @@
         confirmPassword: document.getElementById('confirmPasswordError')
     };
 
-    // Validar formulario
+
     function validarFormulario() {
         let isValid = true;
 
-        // Limpiar errores previos
+   
         Object.values(errores).forEach(error => error.innerText = "");
 
-        // Validar nombre
+      
         if (nombre.value.trim() === '') {
             errores.nombre.innerText = "El nombre es obligatorio";
             isValid = false;
         }
 
-        // Validar apellidos
+       
         if (apellido.value.trim() === '') {
             errores.apellido.innerText = "Los apellidos son obligatorios";
             isValid = false;
         }
 
-        // Validar email
+    // Validar email
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(email.value)) {
             errores.email.innerText = "Ingrese un email válido";
             isValid = false;
         }
 
-        // Validar contraseña
+   
         if (password.value.length < 6) {
             errores.password.innerText = "La contraseña debe tener al menos 6 caracteres";
             isValid = false;
         }
 
-        // Validar confirmación de contraseña
+
         if (password.value !== confirmPassword.value) {
             errores.confirmPassword.innerText = "Las contraseñas no coinciden";
             isValid = false;
@@ -132,12 +132,12 @@
         return isValid;
     }
 
-    // Evento para validar al escribir
+
     [nombre, apellido, email, password, confirmPassword].forEach(input => {
         input.addEventListener('input', validarFormulario);
     });
 
-    // Evento para el formulario
+ 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
 
@@ -158,9 +158,8 @@
                 const result = await response.json();
 
                 if (result.status === "success") {
-                    alert("Registro exitoso. Ahora puede iniciar sesión.");
                     form.reset();
-                    window.location.href = "../InicioSesion/Loader.html"; // Cambia la ruta según sea necesario
+                    window.location.href = "../RegistroClientes/Loader.html"; 
                 } else {
                     alert(result.message);
                 }
@@ -171,12 +170,12 @@
         }
     });
 
-    // Evento para el botón de cancelar
+    
     if (btnCancelar) {
         btnCancelar.addEventListener('click', function () {
             form.reset();
             Object.values(errores).forEach(error => error.innerText = "");
-            window.location.href = '../InterfazPrincipal/Interfaz.html'; // Cambia la ruta según sea necesario
+            window.location.href = '../InterfazPrincipal/Interfaz.html'; 
         });
     }
 });
