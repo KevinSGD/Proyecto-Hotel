@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,7 +10,7 @@
 </head>
 
 <body>
-    <!-- Barra de navegación -->
+    
     <nav class="navbar">
         <div class="navbar-brand">
             <a href="../InterfazPrincipal/Interfaz.html" class="logo">
@@ -18,7 +19,6 @@
             </a>
         </div>
 
-        <!-- Espacio vacío para mantener el equilibrio en el diseño -->
         <div style="width: 150px;"></div>
     </nav>
     <div class="page-container">
@@ -110,7 +110,7 @@
             document.getElementById('tipo-habitacion-hidden').value = selectedRoomType;
         });
 
-        // Establecer fechas mínimas para entrada y salida
+       
         const today = new Date();
         const tomorrow = new Date(today);
         tomorrow.setDate(tomorrow.getDate() + 1);
@@ -122,7 +122,7 @@
         document.getElementById('fecha-entrada').min = formatDate(today);
         document.getElementById('fecha-salida').min = formatDate(tomorrow);
 
-        // Actualizar fecha mínima de salida cuando cambia la fecha de entrada
+        
         document.getElementById('fecha-entrada').addEventListener('change', function () {
             const entryDate = new Date(this.value);
             const nextDay = new Date(entryDate);
@@ -130,7 +130,6 @@
 
             document.getElementById('fecha-salida').min = formatDate(nextDay);
 
-            // Si la fecha de salida es anterior a la nueva fecha mínima, actualizarla
             const currentExitDate = new Date(document.getElementById('fecha-salida').value);
             if (currentExitDate <= entryDate) {
                 document.getElementById('fecha-salida').value = formatDate(nextDay);

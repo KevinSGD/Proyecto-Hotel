@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 
 <head>
@@ -43,7 +43,7 @@
       background-color: var(--light);
     }
 
-    /* Navigation Bar */
+  
     .navbar {
       background-color: var(--white);
       box-shadow: var(--shadow);
@@ -108,7 +108,7 @@
       color: var(--primary);
     }
 
-    /* Page Header */
+  
     .page-header {
       background: linear-gradient(to right, var(--primary-dark), var(--primary));
       color: var(--white);
@@ -128,7 +128,7 @@
       margin: 0 auto;
     }
 
-    /* Main Content */
+
     .main-content {
       padding: 40px 0;
     }
@@ -139,7 +139,7 @@
       gap: 30px;
     }
 
-    /* Card Styles */
+    
     .card {
       background-color: var(--white);
       border-radius: 10px;
@@ -160,7 +160,7 @@
       padding: 20px;
     }
 
-    /* Form Styles */
+    
     .form-group {
       margin-bottom: 20px;
     }
@@ -198,7 +198,7 @@
     }
 
 
-    /* Selected Services */
+  
     .selected-services {
       margin-top: 20px;
     }
@@ -248,7 +248,6 @@
       color: #ef4444;
     }
 
-    /* Room Summary */
     .room-summary {
       display: flex;
       background-color: var(--light-blue);
@@ -277,7 +276,7 @@
       color: var(--gray);
     }
 
-    /* Price Summary */
+    
     .price-summary {
       margin-top: 20px;
       background-color: var(--light-blue);
@@ -307,7 +306,7 @@
       font-weight: 500;
     }
 
-    /* Payment Methods */
+    
     .payment-methods {
       display: flex;
       gap: 10px;
@@ -344,7 +343,7 @@
       font-weight: 500;
     }
 
-    /* Buttons */
+    
     .btn {
       display: inline-block;
       padding: 12px 25px;
@@ -391,7 +390,7 @@
       margin-top: 30px;
     }
 
-    /* Footer */
+    
     .footer {
       background-color: var(--secondary);
       color: var(--light);
@@ -405,7 +404,7 @@
       font-size: 0.9rem;
     }
 
-    /* Responsive styles */
+    
     @media (max-width: 768px) {
       .checkout-grid {
         grid-template-columns: 1fr;
@@ -423,7 +422,7 @@
 </head>
 
 <body>
-  <!-- Page Header -->
+  
   <header class="page-header">
     <div class="container">
       <h1 class="page-title">Finalizar Reserva</h1>
@@ -431,11 +430,11 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  
   <section class="main-content">
     <div class="container">
       <div class="checkout-grid">
-        <!-- Guest Information Form -->
+       
         <div class="card">
           <div class="card-header">
             Información del Huésped
@@ -503,13 +502,13 @@
           </div>
         </div>
 
-        <!-- Reservation Summary -->
+        
         <div class="card">
           <div class="card-header">
             Resumen de Reserva
           </div>
           <div class="card-body">
-            <!-- Room Summary -->
+           
             <div class="room-summary">
               <img src="https://placehold.co/120x20hite" alt="Habitación Deluxe" class="room-image" id="room-image">
               <div class="room-details">
@@ -518,15 +517,14 @@
               </div>
             </div>
 
-            <!-- Selected Services -->
+            
             <div class="selected-services">
               <h3>Servicios seleccionados</h3>
               <ul class="service-list" id="service-list">
-                <!-- Services will be populated by JavaScript -->
               </ul>
             </div>
 
-            <!-- Price Summary -->
+           
             <div class="price-summary">
               <div class="price-row">
                 <div class="price-label">Habitación</div>
@@ -554,7 +552,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+
   <footer class="footer">
     <div class="container">
       <p>&copy; <span id="current-year">2025</span> Horizon Prime Hotel. Todos los derechos reservados.</p>
@@ -579,10 +577,9 @@
         .catch(error => console.error("Error:", error));
     });
 
-    // Set current year in footer
     document.getElementById("current-year").textContent = new Date().getFullYear();
 
-    // Sample data for room (in a real application, this would come from the previous page)
+   
     const roomData = {
       name: "Habitación Deluxe Ocean View",
       image: "https://placehold.co/600x400/blue/white",
@@ -592,7 +589,6 @@
       children: 0
     };
 
-    // Sample services data (in a real application, these would be retrieved from localStorage or URL parameters)
     const availableServices = [
       { id: 1, name: "Servicio a la habitación", price: 50, icon: "fas fa-concierge-bell", priceType: "por_dia" },
       { id: 2, name: "Experiencia Gastronómica", price: 120, icon: "fas fa-utensils", priceType: "por_dia" },
@@ -607,10 +603,10 @@
       return storedServices ? JSON.parse(storedServices) : [];
     }
 
-    // Function to render selected services
+    
     function renderSelectedServices() {
       const serviceList = document.getElementById('service-list');
-      serviceList.innerHTML = ''; // Limpiar la lista antes de agregar nuevos elementos
+      serviceList.innerHTML = ''; 
 
       const selectedServices = getSelectedServices();
       let totalServicesPrice = 0;
@@ -621,11 +617,11 @@
       }
 
       selectedServices.forEach(service => {
-        // Extraer precio numérico
+       
         const priceNumber = parseFloat(service.price.replace(/[^0-9.]/g, ""));
         totalServicesPrice += priceNumber;
 
-        // Crear un elemento de lista para cada servicio
+       
         const serviceItem = document.createElement('li');
         serviceItem.className = 'service-item';
         serviceItem.innerHTML = `
@@ -642,13 +638,13 @@
         serviceList.appendChild(serviceItem);
       });
 
-      // Actualizar el precio de los servicios en la interfaz
+     
       document.getElementById('services-price').textContent = `$${totalServicesPrice.toFixed(2)}`;
 
-      // Actualizar el total general
+      
       updateTotalPrice(roomData.price * roomData.nights, totalServicesPrice);
 
-      // Agregar evento para eliminar servicios seleccionados
+      
       document.querySelectorAll('.service-remove').forEach(button => {
         button.addEventListener('click', function () {
           const serviceTitle = this.getAttribute('data-title');
@@ -657,22 +653,22 @@
       });
     }
 
-    // Function to remove a service
+    
     function removeService(serviceId) {
       const selectedServiceIds = getSelectedServices();
       const updatedServices = selectedServiceIds.filter(id => id !== serviceId);
 
-      // Update localStorage
+      
       localStorage.setItem('selectedServices', JSON.stringify(updatedServices));
 
-      // Re-render services
+    
       renderSelectedServices();
     }
 
-    // Function to update total price
+    
     function updateTotalPrice(roomPrice, servicesPrice) {
       const subtotal = roomPrice + servicesPrice;
-      const tax = subtotal * 0.16; // 16% tax
+      const tax = subtotal * 0.16;
       const total = subtotal + tax;
 
       document.getElementById('room-price').textContent = `$${roomPrice.toFixed(2)}`;
@@ -680,22 +676,22 @@
       document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
     }
 
-    // Function to initialize the page
+   
     function initPage() {
-      // Set room details
+      
       document.getElementById('room-name').textContent = roomData.name;
       document.getElementById('room-info').textContent = `${roomData.adults} adultos · ${roomData.nights} noches`;
       document.getElementById('room-image').src = roomData.image;
       document.getElementById('room-image').alt = roomData.name;
 
-      // Set room price in summary
+     
       const roomTotalPrice = roomData.price * roomData.nights;
       document.getElementById('room-price').textContent = `$${roomTotalPrice.toFixed(2)}`;
 
-      // Render selected services
+     
       renderSelectedServices();
 
-      // Set default dates
+      
       const today = new Date();
       const tomorrow = new Date(today);
       tomorrow.setDate(tomorrow.getDate() + 1);
@@ -706,7 +702,7 @@
       document.getElementById('arrival-date').valueAsDate = today;
       document.getElementById('departure-date').valueAsDate = checkoutDate;
 
-      // Payment method selection
+      
       const paymentMethods = document.querySelectorAll('.payment-method');
       paymentMethods.forEach(method => {
         method.addEventListener('click', function () {
@@ -715,14 +711,13 @@
         });
       });
 
-      // Form submission
+     
       document.getElementById('checkout-form').addEventListener('submit', function (e) {
         e.preventDefault();
         alert('¡Reserva completada con éxito! Gracias por elegir Horizon Prime Hotel.');
       });
     }
-
-    // Initialize the page when DOM is loaded
+    
     document.addEventListener('DOMContentLoaded', initPage);
   </script>
 </body>

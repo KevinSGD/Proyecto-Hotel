@@ -1,16 +1,12 @@
-// Establecer el año actual en el footer
 document.getElementById("current-year").textContent = new Date().getFullYear();
 
-// Efecto de selección en los checkboxes
 document.addEventListener("DOMContentLoaded", function () {
   const fadeElements = document.querySelectorAll(".fade-in");
 
-  // Activar animaciones
   fadeElements.forEach(element => {
     element.style.opacity = "1";
   });
 
-  // Cambiar sombra al seleccionar servicios
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener("change", function () {
@@ -23,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Verificar selección al presionar el botón
   const finalizarBtn = document.querySelector(".btn-primary");
   finalizarBtn.addEventListener("click", function () {
     const selectedServices = [];
@@ -47,14 +42,13 @@ document.addEventListener("DOMContentLoaded", function () {
     if (selectedServices.length === 0) {
       const confirmacion = confirm("No ha seleccionado ningún servicio extra. ¿Desea continuar sin servicios?");
       if (!confirmacion) {
-        return; // Detiene la ejecución si el usuario cancela
+        return; 
       }
     }
 
-    // Guardar en localStorage
+
     localStorage.setItem("selectedServices", JSON.stringify(selectedServices));
 
-    // Redirigir a la nueva página de resumen de servicios
-    window.location.href = "../Reservas/CheckIn.html";
+    window.location.href = "../Reservas/c.html";
   });
 });
