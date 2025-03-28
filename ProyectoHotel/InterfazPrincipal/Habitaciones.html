@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -429,7 +430,7 @@
       font-size: 0.9rem;
     }
 
-    /* Footer */
+   
     .footer {
       background-color: var(--secondary);
       color: var(--light);
@@ -442,7 +443,7 @@
       font-size: 0.9rem;
     }
 
-    /* Animation classes */
+    
     .fade-in {
       opacity: 0;
       animation: fadeIn 0.8s forwards;
@@ -472,7 +473,7 @@
       animation-delay: 0.6s;
     }
 
-    /* Mobile menu */
+    
     .mobile-menu-btn {
       display: none;
       background: none;
@@ -482,7 +483,7 @@
       cursor: pointer;
     }
 
-    /* Responsive styles */
+    
     @media (max-width: 768px) {
       .nav-links {
         display: none;
@@ -551,7 +552,7 @@
 </head>
 
 <body>
-  <!-- Navigation Bar -->
+  
   <nav class="navbar">
     <div class="container nav-container">
       <a href="../InterfazPrincipal/Interfaz.html" class="logo-container">
@@ -573,7 +574,7 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  
   <section class="hero">
     <div class="hero-content">
       <h1 class="fade-in">Nuestras Habitaciones</h1>
@@ -581,12 +582,12 @@
     </div>
   </section>
 
-  <!-- Room Categories -->
+  
   <section class="room-categories">
     <div class="container">
       <h2 class="section-title fade-in">Experiencias de Alojamiento Excepcionales</h2>
       <div class="rooms-container">
-        <!-- Suite Presidencial -->
+        
         <div class="room-card fade-in">
           <div class="room-image-container">
             <img src="https://cache.marriott.com/content/dam/marriott-renditions/TGZMC/tgzmc-suite-0022-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=1336px:*" alt="Suite Presidencial" class="room-image">
@@ -684,7 +685,7 @@
           </div>
         </div>
 
-        <!-- Suite Ejecutiva -->
+       
         <div class="room-card fade-in delay-1">
           <div class="room-image-container">
             <img src="https://www.kayak.com.co/rimg/himg/d6/4e/b1/leonardo-22820-186657817-499823.jpg?width=1366&height=768&crop=true" alt="Suite Ejecutiva" class="room-image">
@@ -782,7 +783,7 @@
           </div>
         </div>
 
-        <!-- Habitación Deluxe -->
+      
         <div class="room-card fade-in delay-2">
           <div class="room-image-container">
             <img src="https://cache.marriott.com/is/image/marriotts7prod/jw-lasjw-deluxe-king-room-25152:Feature-Hor?wid=1920&fit=constrains" alt="Habitación Deluxe" class="room-image">
@@ -885,7 +886,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+
   <footer class="footer">
     <div class="container">
       <p>&copy; <span id="current-year">2025</span> Horizon Prime Hotel. Todos los derechos reservados.</p>
@@ -893,10 +894,10 @@
   </footer>
 
   <script>
-    // Set current year in footer
+    
     document.getElementById("current-year").textContent = new Date().getFullYear();
 
-    // Mobile menu toggle
+    
     const mobileMenuBtn = document.querySelector(".mobile-menu-btn");
     const mobileMenuCloseBtn = document.querySelector(".mobile-nav-close");
     const mobileNav = document.querySelector(".mobile-nav");
@@ -911,28 +912,27 @@
       document.body.style.overflow = "";
     });
 
-    // Category tabs functionality
+   
     const categoryTabs = document.querySelectorAll(".category-tab");
 
     categoryTabs.forEach(tab => {
       tab.addEventListener("click", function () {
-        // Remove active class from all tabs
+       
         categoryTabs.forEach(t => t.classList.remove("active"));
 
-        // Add active class to clicked tab
+        
         this.classList.add("active");
 
-        // Here you would normally filter the rooms based on the selected category
-        // For this demo, we'll just log the selected category
+     
         console.log("Selected category: " + this.textContent);
       });
     });
 
-    // Animation on scroll
+    
     document.addEventListener("DOMContentLoaded", function () {
       const fadeElements = document.querySelectorAll('.fade-in');
 
-      // Trigger animations immediately for elements in viewport
+     
       fadeElements.forEach(element => {
         element.style.opacity = "1";
       });

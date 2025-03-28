@@ -1,4 +1,3 @@
-/* Base Styles */
 :root {
   --primary: #1e40af;
   --primary-dark: #1e3a8a;
@@ -55,7 +54,7 @@ img {
   height: auto;
 }
 
-/* Button Styles */
+
 .btn {
   display: inline-block;
   padding: 12px 24px;
@@ -90,7 +89,7 @@ img {
   width: 100%;
 }
 
-/* Header Styles */
+
 .header {
   position: fixed;
   top: 0;
@@ -193,7 +192,7 @@ img {
   color: var(--primary-dark);
 }
 
-/* Mobile Menu */
+
 .mobile-menu {
   position: fixed;
   top: 0;
@@ -255,7 +254,7 @@ img {
   margin-top: auto;
 }
 
-/* Hero Section */
+
 .hero {
   position: relative;
   height: 100vh;
@@ -313,7 +312,7 @@ img {
   color: var(--light-blue);
 }
 
-/* Booking Form */
+
 .booking-form {
   position: absolute;
   bottom: 0;
@@ -430,7 +429,7 @@ img {
   pointer-events: none;
 }
 
-/* Features Section */
+
 .features {
   padding: 80px 0;
   background-color: var(--white);
@@ -532,7 +531,7 @@ img {
   font-size: 12px;
 }
 
-/* Amenities Section */
+
 .amenities {
   padding: 80px 0;
   background-color: var(--primary-dark);
@@ -578,7 +577,7 @@ img {
   color: var(--light-blue);
 }
 
-/* Testimonials */
+
 .testimonials {
   padding: 80px 0;
   background-color: var(--light-blue);
@@ -634,7 +633,7 @@ img {
   color: var(--gray);
 }
 
-/* CTA Section */
+
 .cta {
   padding: 80px 0;
   background: linear-gradient(to right, var(--primary-dark), var(--primary));
@@ -660,7 +659,7 @@ img {
   font-size: 18px;
 }
 
-/* Footer */
+
 .footer {
   background-color: var(--secondary);
   color: var(--light);
@@ -775,7 +774,7 @@ address {
   font-size: 14px;
 }
 
-/* Animation Classes */
+
 .fade-in-up {
   opacity: 0;
   transform: translateY(30px);
@@ -814,7 +813,7 @@ address {
   transform: scale(1);
 }
 
-/* Responsive Styles */
+
 @media (max-width: 1024px) {
   .features-grid,
   .testimonials-grid {
@@ -876,4 +875,3 @@ address {
     flex-direction: column;
   }
 }
-
