@@ -1,10 +1,10 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Horizon Prime Hotel - Check-in</title>
+  <title>Horizon Prime Hotel - Facturación</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,6 +25,8 @@
       --dark: #0f172a;
       --success: #10b981;
       --success-light: #d1fae5;
+      --danger: #ef4444;
+      --warning: #f59e0b;
       --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
       --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
       --transition: all 0.3s ease;
@@ -43,7 +45,6 @@
       background-color: var(--light);
     }
 
-  
     .navbar {
       background-color: var(--white);
       box-shadow: var(--shadow);
@@ -59,19 +60,21 @@
       padding: 0 20px;
     }
 
-    .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo-container {
+    .navbar-brand {
       display: flex;
       align-items: center;
-      gap: 12px;
     }
 
     .logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 700;
+      font-size: 1.5rem;
+    }
+
+    .logo-circle {
       width: 40px;
       height: 40px;
       background-color: var(--primary);
@@ -82,33 +85,9 @@
       justify-content: center;
       font-weight: 700;
       font-size: 20px;
+      margin-right: 10px;
     }
 
-    .logo-text {
-      font-weight: 700;
-      font-size: 20px;
-      color: var(--primary);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 30px;
-    }
-
-    .nav-link {
-      color: var(--secondary);
-      text-decoration: none;
-      font-weight: 500;
-      padding: 8px 0;
-      position: relative;
-      transition: var(--transition);
-    }
-
-    .nav-link:hover {
-      color: var(--primary);
-    }
-
-  
     .page-header {
       background: linear-gradient(to right, var(--primary-dark), var(--primary));
       color: var(--white);
@@ -128,7 +107,6 @@
       margin: 0 auto;
     }
 
-
     .main-content {
       padding: 40px 0;
     }
@@ -139,7 +117,6 @@
       gap: 30px;
     }
 
-    
     .card {
       background-color: var(--white);
       border-radius: 10px;
@@ -160,7 +137,6 @@
       padding: 20px;
     }
 
-    
     .form-group {
       margin-bottom: 20px;
     }
@@ -197,8 +173,6 @@
       flex: 1;
     }
 
-
-  
     .selected-services {
       margin-top: 20px;
     }
@@ -218,7 +192,9 @@
     }
 
     .service-icon {
-      display: none;
+      margin-right: 10px;
+      color: var(--primary);
+      font-size: 1.2rem;
     }
 
     .service-details {
@@ -245,7 +221,7 @@
     }
 
     .service-remove:hover {
-      color: #ef4444;
+      color: var(--danger);
     }
 
     .room-summary {
@@ -257,7 +233,9 @@
     }
 
     .room-image {
-      display: none;
+      width: 120px;
+      height: 80px;
+      object-fit: cover;
     }
 
     .room-details {
@@ -276,7 +254,6 @@
       color: var(--gray);
     }
 
-    
     .price-summary {
       margin-top: 20px;
       background-color: var(--light-blue);
@@ -306,7 +283,6 @@
       font-weight: 500;
     }
 
-    
     .payment-methods {
       display: flex;
       gap: 10px;
@@ -343,7 +319,6 @@
       font-weight: 500;
     }
 
-    
     .btn {
       display: inline-block;
       padding: 12px 25px;
@@ -390,7 +365,6 @@
       margin-top: 30px;
     }
 
-    
     .footer {
       background-color: var(--secondary);
       color: var(--light);
@@ -404,68 +378,209 @@
       font-size: 0.9rem;
     }
 
-    
+    .tax-selector {
+      margin-top: 10px;
+      padding: 10px;
+      background-color: var(--light-blue);
+      border-radius: 8px;
+    }
+
+    .tax-selector h4 {
+      margin-bottom: 10px;
+      color: var(--primary-dark);
+    }
+
+    .tax-options {
+      display: flex;
+      gap: 10px;
+    }
+
+    .tax-option {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .tax-option input {
+      margin-right: 5px;
+    }
+
+    .alert {
+      padding: 10px 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+
+    .alert-info {
+      background-color: var(--light-blue);
+      color: var(--primary-dark);
+      border-left: 4px solid var(--primary);
+    }
+
+    .alert-success {
+      background-color: var(--success-light);
+      color: var(--success);
+      border-left: 4px solid var(--success);
+    }
+
+    .alert-warning {
+      background-color: #fef3c7;
+      color: var(--warning);
+      border-left: 4px solid var(--warning);
+    }
+
+    .invoice-number {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 5px;
+    }
+
+    .customer-info {
+      background-color: var(--light-blue);
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .customer-info h3 {
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+      font-size: 1rem;
+    }
+
+    .customer-detail {
+      display: flex;
+      margin-bottom: 8px;
+    }
+
+    .customer-label {
+      width: 120px;
+      font-weight: 500;
+      color: var(--gray);
+    }
+
+    .customer-value {
+      flex: 1;
+    }
+
     @media (max-width: 768px) {
       .checkout-grid {
         grid-template-columns: 1fr;
       }
 
       .form-row {
-        grid-template-columns: 1fr;
+        flex-direction: column;
       }
 
       .btn-group {
         flex-direction: column;
+      }
+
+      .room-image {
+        width: 80px;
+        height: 60px;
+      }
+
+      .customer-detail {
+        flex-direction: column;
+      }
+
+      .customer-label {
+        width: 100%;
+        margin-bottom: 4px;
       }
     }
   </style>
 </head>
 
 <body>
-  
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-brand">
+        <a href="../InterfazPrincipal/Interfaz.html" class="logo">
+          <div class="logo-circle">H</div>
+          Horizon Prime
+        </a>
+      </div>
+    </div>
+  </nav>
+
   <header class="page-header">
     <div class="container">
-      <h1 class="page-title">Finalizar Reserva</h1>
-      <p class="page-subtitle">Complete sus datos para confirmar su reserva</p>
+      <h1 class="page-title">Facturación</h1>
+      <p class="page-subtitle">Confirme los detalles de su reserva y complete el pago</p>
     </div>
   </header>
 
-  
   <section class="main-content">
     <div class="container">
       <div class="checkout-grid">
-       
         <div class="card">
           <div class="card-header">
             Información del Huésped
           </div>
           <div class="card-body">
+            <div class="alert alert-info">
+              <i class="fas fa-info-circle"></i> Los datos han sido cargados desde su reserva previa.
+            </div>
+
+            <div class="customer-info">
+              <h3>Datos del Cliente</h3>
+              <div class="customer-detail">
+                <div class="customer-label">Nombre:</div>
+                <div class="customer-value" id="customer-name">Cargando...</div>
+              </div>
+              <div class="customer-detail">
+                <div class="customer-label">Email:</div>
+                <div class="customer-value" id="customer-email">Cargando...</div>
+              </div>
+              <div class="customer-detail">
+                <div class="customer-label">Teléfono:</div>
+                <div class="customer-value" id="customer-phone">Cargando...</div>
+              </div>
+              <div class="customer-detail">
+                <div class="customer-label">Huéspedes:</div>
+                <div class="customer-value" id="customer-guests">Cargando...</div>
+              </div>
+              <div class="customer-detail">
+                <div class="customer-label">Habitación:</div>
+                <div class="customer-value" id="customer-room">Cargando...</div>
+              </div>
+            </div>
+
             <form id="checkout-form">
-              <div class="form-row">
+              <div class="form-group">
+                <label for="invoice-type">Tipo de Factura</label>
+                <select id="invoice-type" class="form-control">
+                  <option value="personal">Factura Personal</option>
+                  <option value="business">Factura Empresarial</option>
+                </select>
+              </div>
+
+              <div id="business-fields" style="display: none;">
                 <div class="form-group">
-                  <label for="first-name">Nombre Completo</label>
-                  <input type="text" id="first-name" class="form-control" required>
+                  <label for="business-name">Nombre de la Empresa</label>
+                  <input type="text" id="business-name" class="form-control">
+                </div>
+                <div class="form-group">
+                  <label for="tax-id">RFC</label>
+                  <input type="text" id="tax-id" class="form-control">
                 </div>
               </div>
 
-              <div class="form-group">
-                <label for="email">Correo electrónico</label>
-                <input type="email" id="email" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                <label for="phone">Teléfono</label>
-                <input type="tel" id="phone" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                <label for="arrival-date">Fecha de llegada</label>
-                <input type="date" id="arrival-date" class="form-control" required>
-              </div>
-
-              <div class="form-group">
-                <label for="departure-date">Fecha de salida</label>
-                <input type="date" id="departure-date" class="form-control" required>
+              <div class="tax-selector">
+                <h4>Régimen Fiscal</h4>
+                <div class="tax-options">
+                  <div class="tax-option">
+                    <input type="radio" id="tax-standard" name="tax-regime" value="16" checked>
+                    <label for="tax-standard">Estándar (16%)</label>
+                  </div>
+                  <div class="tax-option">
+                    <input type="radio" id="tax-border" name="tax-regime" value="8">
+                    <label for="tax-border">Fronterizo (8%)</label>
+                  </div>
+                </div>
               </div>
 
               <div class="form-group">
@@ -495,40 +610,39 @@
               </div>
 
               <div class="btn-group">
-                <a href="../Reservas/ServiciosExtra.html" class="btn btn-outline">Volver a servicios</a>
-                <button type="submit" class="btn btn-primary">Confirmar Reserva</button>
+                <a href="javascript:history.back()" class="btn btn-outline">Volver</a>
+                <button type="submit" class="btn btn-primary">Generar Factura</button>
               </div>
             </form>
           </div>
         </div>
 
-        
         <div class="card">
           <div class="card-header">
-            Resumen de Reserva
+            Resumen de Facturación
           </div>
           <div class="card-body">
-           
+            <div class="invoice-number">Factura #: <span id="invoice-number">INV-2025-0001</span></div>
+            
             <div class="room-summary">
-              <img src="https://placehold.co/120x20hite" alt="Habitación Deluxe" class="room-image" id="room-image">
+              <img src="https://placehold.co/120x80/blue/white" alt="Habitación" class="room-image" id="room-image">
               <div class="room-details">
-                <h3 class="room-name" id="room-name">Habitación Deluxe</h3>
-                <p class="room-info" id="room-info">2 adultos · 5 noches</p>
+                <h3 class="room-name" id="room-name">Cargando...</h3>
+                <p class="room-info" id="room-info">Cargando...</p>
               </div>
             </div>
 
-            
             <div class="selected-services">
               <h3>Servicios seleccionados</h3>
               <ul class="service-list" id="service-list">
+                <!-- Los servicios se cargarán dinámicamente -->
               </ul>
             </div>
 
-           
             <div class="price-summary">
               <div class="price-row">
                 <div class="price-label">Habitación</div>
-                <div class="price-value" id="room-price">$1,750.0 0</div>
+                <div class="price-value" id="room-price">$0.00</div>
               </div>
 
               <div class="price-row">
@@ -537,13 +651,18 @@
               </div>
 
               <div class="price-row">
-                <div class="price-label">Impuestos (16%)</div>
-                <div class="price-value" id="tax-price">$280.00</div>
+                <div class="price-label">Subtotal</div>
+                <div class="price-value" id="subtotal-price">$0.00</div>
+              </div>
+
+              <div class="price-row">
+                <div class="price-label">Impuestos (<span id="tax-rate">16</span>%)</div>
+                <div class="price-value" id="tax-price">$0.00</div>
               </div>
 
               <div class="price-row">
                 <div class="price-label">Total</div>
-                <div class="price-value" id="total-price">$2,030.00</div>
+                <div class="price-value" id="total-price">$0.00</div>
               </div>
             </div>
           </div>
@@ -551,7 +670,6 @@
       </div>
     </div>
   </section>
-
 
   <footer class="footer">
     <div class="container">
@@ -561,164 +679,390 @@
 
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      fetch("reservas.php")
-        .then(response => response.json())
-        .then(data => {
-          if (!data.error) {
-            document.getElementById("first-name").value = data.nombre;
-            document.getElementById("email").value = data.email;
-            document.getElementById("phone").value = data.telefono;
-            document.getElementById("arrival-date").value = data.fecha_entrada;
-            document.getElementById("departure-date").value = data.fecha_salida;
-          } else {
-            console.error("No se encontraron reservas");
-          }
-        })
-        .catch(error => console.error("Error:", error));
+      // Cargar datos de reserva desde sessionStorage o localStorage
+      loadReservationData();
+      
+      // Inicializar la página
+      initPage();
+      
+      // Actualizar año actual en el footer
+      document.getElementById("current-year").textContent = new Date().getFullYear();
+      
+      // Manejar cambio en tipo de factura
+      document.getElementById('invoice-type').addEventListener('change', function() {
+        const businessFields = document.getElementById('business-fields');
+        if (this.value === 'business') {
+          businessFields.style.display = 'block';
+        } else {
+          businessFields.style.display = 'none';
+        }
+      });
+      
+      // Manejar cambio en régimen fiscal
+      document.querySelectorAll('input[name="tax-regime"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          const taxRate = this.value;
+          document.getElementById('tax-rate').textContent = taxRate;
+          updatePrices();
+        });
+      });
+      
+      // Manejar envío del formulario
+      document.getElementById('checkout-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Mostrar mensaje de éxito
+        const alert = document.createElement('div');
+        alert.className = 'alert alert-success';
+        alert.innerHTML = '<i class="fas fa-check-circle"></i> Factura generada con éxito. Se ha enviado una copia a su correo electrónico.';
+        
+        this.insertBefore(alert, this.firstChild);
+        
+        // Desplazarse al inicio del formulario
+        window.scrollTo({
+          top: this.offsetTop - 100,
+          behavior: 'smooth'
+        });
+        
+        // Generar nuevo número de factura
+        const invoiceNumber = 'INV-' + new Date().getFullYear() + '-' + 
+          Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('invoice-number').textContent = invoiceNumber;
+        
+        // Guardar factura en localStorage para historial
+        saveInvoice();
+      });
     });
 
-    document.getElementById("current-year").textContent = new Date().getFullYear();
-
-   
-    const roomData = {
-      name: "Habitación Deluxe Ocean View",
-      image: "https://placehold.co/600x400/blue/white",
-      price: 350,
-      nights: 5,
-      adults: 2,
-      children: 0
-    };
-
-    const availableServices = [
-      { id: 1, name: "Servicio a la habitación", price: 50, icon: "fas fa-concierge-bell", priceType: "por_dia" },
-      { id: 2, name: "Experiencia Gastronómica", price: 120, icon: "fas fa-utensils", priceType: "por_dia" },
-      { id: 3, name: "Traslado Ejecutivo", price: 75, icon: "fas fa-car-side", priceType: "por_trayecto" },
-      { id: 4, name: "Spa Premium", price: 90, icon: "fas fa-spa", priceType: "por_persona" },
-      { id: 5, name: "Tour Guiado", price: 60, icon: "fas fa-map-marked-alt", priceType: "por_persona" },
-      { id: 6, name: "Acceso VIP Club", price: 40, icon: "fas fa-glass-cheers", priceType: "por_dia" }
-    ];
-
-    function getSelectedServices() {
-      const storedServices = localStorage.getItem('selectedServices');
-      return storedServices ? JSON.parse(storedServices) : [];
+    // Función para guardar la factura en localStorage
+    function saveInvoice() {
+      const invoiceData = {
+        invoiceNumber: document.getElementById('invoice-number').textContent,
+        date: new Date().toISOString(),
+        customer: {
+          name: document.getElementById('customer-name').textContent,
+          email: document.getElementById('customer-email').textContent,
+          phone: document.getElementById('customer-phone').textContent,
+          guests: document.getElementById('customer-guests').textContent,
+          room: document.getElementById('customer-room').textContent
+        },
+        reservation: {
+          arrivalDate: sessionStorage.getItem('fecha-entrada'),
+          departureDate: sessionStorage.getItem('fecha-salida'),
+          nights: calculateNights(
+            sessionStorage.getItem('fecha-entrada'),
+            sessionStorage.getItem('fecha-salida')
+          )
+        },
+        invoiceType: document.getElementById('invoice-type').value,
+        businessName: document.getElementById('business-name').value || '',
+        taxId: document.getElementById('tax-id').value || '',
+        taxRate: document.querySelector('input[name="tax-regime"]:checked').value,
+        paymentMethod: document.querySelector('.payment-method.active').getAttribute('data-method'),
+        prices: {
+          room: parseFloat(document.getElementById('room-price').textContent.replace(/[^0-9.]/g, '')),
+          services: parseFloat(document.getElementById('services-price').textContent.replace(/[^0-9.]/g, '')),
+          subtotal: parseFloat(document.getElementById('subtotal-price').textContent.replace(/[^0-9.]/g, '')),
+          tax: parseFloat(document.getElementById('tax-price').textContent.replace(/[^0-9.]/g, '')),
+          total: parseFloat(document.getElementById('total-price').textContent.replace(/[^0-9.]/g, ''))
+        }
+      };
+      
+      // Obtener facturas existentes o inicializar array
+      const invoices = JSON.parse(localStorage.getItem('invoices') || '[]');
+      
+      // Añadir nueva factura
+      invoices.push(invoiceData);
+      
+      // Guardar en localStorage
+      localStorage.setItem('invoices', JSON.stringify(invoices));
     }
 
-    
+    // Función para cargar datos de reserva
+    function loadReservationData() {
+      // Intentar obtener datos del formulario de reserva
+      // Primero verificamos si hay datos en sessionStorage
+      const nombre = sessionStorage.getItem('nombre');
+      const email = sessionStorage.getItem('email');
+      const telefono = sessionStorage.getItem('telefono');
+      const fechaEntrada = sessionStorage.getItem('fecha-entrada');
+      const fechaSalida = sessionStorage.getItem('fecha-salida');
+      const huespedes = sessionStorage.getItem('huespedes');
+      const tipoHabitacion = sessionStorage.getItem('tipo-habitacion');
+      
+      // Si no hay datos en sessionStorage, intentamos obtenerlos de la URL
+      if (!nombre || !email || !telefono || !fechaEntrada || !fechaSalida || !huespedes || !tipoHabitacion) {
+        // Simular la obtención de datos del formulario de reserva
+        // En un entorno real, estos datos vendrían del formulario anterior
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // Guardar en sessionStorage para uso futuro
+        if (urlParams.get('nombre')) sessionStorage.setItem('nombre', urlParams.get('nombre'));
+        if (urlParams.get('email')) sessionStorage.setItem('email', urlParams.get('email'));
+        if (urlParams.get('telefono')) sessionStorage.setItem('telefono', urlParams.get('telefono'));
+        if (urlParams.get('fecha-entrada')) sessionStorage.setItem('fecha-entrada', urlParams.get('fecha-entrada'));
+        if (urlParams.get('fecha-salida')) sessionStorage.setItem('fecha-salida', urlParams.get('fecha-salida'));
+        if (urlParams.get('huespedes')) sessionStorage.setItem('huespedes', urlParams.get('huespedes'));
+        if (urlParams.get('tipo-habitacion')) sessionStorage.setItem('tipo-habitacion', urlParams.get('tipo-habitacion'));
+      }
+      
+      // Si aún no hay datos, usamos datos de ejemplo
+      if (!sessionStorage.getItem('nombre')) {
+        // Datos de ejemplo para demostración
+        sessionStorage.setItem('nombre', 'Juan Pérez');
+        sessionStorage.setItem('email', 'juan.perez@ejemplo.com');
+        sessionStorage.setItem('telefono', '555-123-4567');
+        
+        const today = new Date();
+        const checkoutDate = new Date(today);
+        checkoutDate.setDate(checkoutDate.getDate() + 5);
+        
+        sessionStorage.setItem('fecha-entrada', formatDate(today));
+        sessionStorage.setItem('fecha-salida', formatDate(checkoutDate));
+        sessionStorage.setItem('huespedes', '2');
+        sessionStorage.setItem('tipo-habitacion', 'Habitación Deluxe Ocean View');
+      }
+      
+      // Mostrar los datos en la interfaz
+      document.getElementById('customer-name').textContent = sessionStorage.getItem('nombre');
+      document.getElementById('customer-email').textContent = sessionStorage.getItem('email');
+      document.getElementById('customer-phone').textContent = sessionStorage.getItem('telefono');
+      document.getElementById('customer-guests').textContent = sessionStorage.getItem('huespedes') + ' huéspedes';
+      document.getElementById('customer-room').textContent = sessionStorage.getItem('tipo-habitacion');
+      
+      // Actualizar información de la habitación
+      document.getElementById('room-name').textContent = sessionStorage.getItem('tipo-habitacion');
+      
+      // Calcular noches
+      const nights = calculateNights(
+        sessionStorage.getItem('fecha-entrada'),
+        sessionStorage.getItem('fecha-salida')
+      );
+      
+      document.getElementById('room-info').textContent = 
+        sessionStorage.getItem('huespedes') + ' huéspedes · ' + nights + ' noches';
+    }
+
+    // Función para formatear fecha en formato YYYY-MM-DD
+    function formatDate(date) {
+      const d = new Date(date);
+      const year = d.getFullYear();
+      const month = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
+
+    // Función para calcular la duración de la estancia en noches
+    function calculateNights(startDate, endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    }
+
+    // Función para cargar los servicios seleccionados
+    function loadSelectedServices() {
+      // Intentar cargar desde localStorage
+      const storedServices = localStorage.getItem('selectedServices');
+      let selectedServices = [];
+      
+      if (storedServices) {
+        try {
+          selectedServices = JSON.parse(storedServices);
+        } catch (e) {
+          console.error("Error al parsear servicios:", e);
+          selectedServices = [];
+        }
+      }
+      
+      // Si no hay servicios en localStorage, usar datos de ejemplo
+      if (!selectedServices || selectedServices.length === 0) {
+        // Precios basados en el tipo de habitación
+        const roomType = sessionStorage.getItem('tipo-habitacion') || '';
+        let baseServicePrice = 50; // Precio base para servicios
+        
+        if (roomType.includes('Deluxe')) {
+          baseServicePrice = 75;
+        } else if (roomType.includes('Suite')) {
+          baseServicePrice = 100;
+        }
+        
+        selectedServices = [
+          { id: 1, title: "Servicio a la habitación", price: `$${baseServicePrice}.00`, icon: "fas fa-concierge-bell" },
+          { id: 3, title: "Traslado Ejecutivo", price: `$${baseServicePrice + 25}.00`, icon: "fas fa-car-side" }
+        ];
+        
+        // Guardar en localStorage para uso futuro
+        localStorage.setItem('selectedServices', JSON.stringify(selectedServices));
+      }
+      
+      return selectedServices;
+    }
+
+    // Función para renderizar los servicios seleccionados
     function renderSelectedServices() {
       const serviceList = document.getElementById('service-list');
-      serviceList.innerHTML = ''; 
-
-      const selectedServices = getSelectedServices();
-      let totalServicesPrice = 0;
-
+      serviceList.innerHTML = '';
+      
+      const selectedServices = loadSelectedServices();
+      
       if (selectedServices.length === 0) {
         serviceList.innerHTML = '<p>No se han seleccionado servicios adicionales.</p>';
-        return;
+        return 0;
       }
-
+      
+      let totalServicesPrice = 0;
+      
       selectedServices.forEach(service => {
-       
-        const priceNumber = parseFloat(service.price.replace(/[^0-9.]/g, ""));
-        totalServicesPrice += priceNumber;
-
-       
+        // Extraer el precio numérico
+        const priceString = service.price.replace(/[^\d.]/g, '');
+        const priceNumber = parseFloat(priceString);
+        
+        if (!isNaN(priceNumber)) {
+          totalServicesPrice += priceNumber;
+        }
+        
+        // Crear elemento de servicio
         const serviceItem = document.createElement('li');
         serviceItem.className = 'service-item';
         serviceItem.innerHTML = `
-  <div class="service-details">
-    <div class="service-name">${service.title}</div>
-    <div class="service-price">${service.price}</div>
-  </div>
-  <button class="service-remove" data-title="${service.title}">
-    <i class="fas fa-times"></i>
-  </button>
-`;
-
-
+          <div class="service-icon">
+            <i class="${service.icon || 'fas fa-concierge-bell'}"></i>
+          </div>
+          <div class="service-details">
+            <div class="service-name">${service.title}</div>
+            <div class="service-price">${service.price}</div>
+          </div>
+          <button class="service-remove" data-id="${service.id}">
+            <i class="fas fa-times"></i>
+          </button>
+        `;
+        
         serviceList.appendChild(serviceItem);
       });
-
-     
-      document.getElementById('services-price').textContent = `$${totalServicesPrice.toFixed(2)}`;
-
       
-      updateTotalPrice(roomData.price * roomData.nights, totalServicesPrice);
-
-      
+      // Agregar event listeners a los botones de eliminar
       document.querySelectorAll('.service-remove').forEach(button => {
-        button.addEventListener('click', function () {
-          const serviceTitle = this.getAttribute('data-title');
-          removeService(serviceTitle);
+        button.addEventListener('click', function() {
+          const serviceId = parseInt(this.getAttribute('data-id'));
+          removeService(serviceId);
         });
       });
-    }
-
-    
-    function removeService(serviceId) {
-      const selectedServiceIds = getSelectedServices();
-      const updatedServices = selectedServiceIds.filter(id => id !== serviceId);
-
       
-      localStorage.setItem('selectedServices', JSON.stringify(updatedServices));
-
-    
-      renderSelectedServices();
+      return totalServicesPrice;
     }
 
-    
-    function updateTotalPrice(roomPrice, servicesPrice) {
-      const subtotal = roomPrice + servicesPrice;
-      const tax = subtotal * 0.16;
-      const total = subtotal + tax;
+    // Función para eliminar un servicio
+    function removeService(serviceId) {
+      const selectedServices = loadSelectedServices();
+      const updatedServices = selectedServices.filter(service => service.id !== serviceId);
+      
+      // Guardar servicios actualizados
+      localStorage.setItem('selectedServices', JSON.stringify(updatedServices));
+      
+      // Volver a renderizar y actualizar precios
+      renderSelectedServices();
+      updatePrices();
+    }
 
-      document.getElementById('room-price').textContent = `$${roomPrice.toFixed(2)}`;
+    // Función para obtener precio de habitación según tipo
+    function getRoomPrice(roomType) {
+      // Precios base según tipo de habitación
+      const prices = {
+        'Estándar': 200,
+        'Deluxe': 350,
+        'Suite': 500,
+        'Presidencial': 800
+      };
+      
+      // Buscar coincidencia parcial en el tipo de habitación
+      for (const [key, price] of Object.entries(prices)) {
+        if (roomType.includes(key)) {
+          return price;
+        }
+      }
+      
+      // Precio por defecto si no hay coincidencia
+      return 300;
+    }
+
+    // Función para actualizar los precios
+    function updatePrices() {
+      // Obtener tipo de habitación
+      const roomType = sessionStorage.getItem('tipo-habitacion') || 'Habitación Estándar';
+      
+      // Obtener precio base de la habitación
+      const roomPricePerNight = getRoomPrice(roomType);
+      
+      // Obtener fechas de entrada y salida
+      const arrivalDate = sessionStorage.getItem('fecha-entrada');
+      const departureDate = sessionStorage.getItem('fecha-salida');
+      
+      // Calcular número de noches
+      const nights = calculateNights(arrivalDate, departureDate);
+      
+      // Calcular precio total de la habitación
+      const roomTotalPrice = roomPricePerNight * nights;
+      
+      // Renderizar servicios y obtener precio total
+      const servicesPriceTotal = renderSelectedServices();
+      
+      // Calcular subtotal
+      const subtotal = roomTotalPrice + servicesPriceTotal;
+      
+      // Obtener tasa de impuesto seleccionada
+      const taxRate = parseFloat(document.querySelector('input[name="tax-regime"]:checked').value);
+      
+      // Calcular impuestos
+      const tax = subtotal * (taxRate / 100);
+      
+      // Calcular total
+      const total = subtotal + tax;
+      
+      // Actualizar elementos en la interfaz
+      document.getElementById('room-price').textContent = `$${roomTotalPrice.toFixed(2)}`;
+      document.getElementById('services-price').textContent = `$${servicesPriceTotal.toFixed(2)}`;
+      document.getElementById('subtotal-price').textContent = `$${subtotal.toFixed(2)}`;
       document.getElementById('tax-price').textContent = `$${tax.toFixed(2)}`;
       document.getElementById('total-price').textContent = `$${total.toFixed(2)}`;
+      
+      // Actualizar información de la habitación
+      const guests = sessionStorage.getItem('huespedes') || '2';
+      document.getElementById('room-info').textContent = `${guests} huéspedes · ${nights} noches`;
     }
 
-   
+    // Función para inicializar la página
     function initPage() {
+      // Obtener tipo de habitación
+      const roomType = sessionStorage.getItem('tipo-habitacion') || 'Habitación Estándar';
       
-      document.getElementById('room-name').textContent = roomData.name;
-      document.getElementById('room-info').textContent = `${roomData.adults} adultos · ${roomData.nights} noches`;
-      document.getElementById('room-image').src = roomData.image;
-      document.getElementById('room-image').alt = roomData.name;
-
-     
-      const roomTotalPrice = roomData.price * roomData.nights;
-      document.getElementById('room-price').textContent = `$${roomTotalPrice.toFixed(2)}`;
-
-     
-      renderSelectedServices();
-
+      // Configurar imagen según tipo de habitación
+      let roomImage = "https://placehold.co/120x80/blue/white";
       
-      const today = new Date();
-      const tomorrow = new Date(today);
-      tomorrow.setDate(tomorrow.getDate() + 1);
-
-      const checkoutDate = new Date(today);
-      checkoutDate.setDate(checkoutDate.getDate() + roomData.nights);
-
-      document.getElementById('arrival-date').valueAsDate = today;
-      document.getElementById('departure-date').valueAsDate = checkoutDate;
-
+      if (roomType.includes('Deluxe')) {
+        roomImage = "https://placehold.co/120x80/1e40af/white";
+      } else if (roomType.includes('Suite')) {
+        roomImage = "https://placehold.co/120x80/0ea5e9/white";
+      }
       
+      // Establecer datos de la habitación
+      document.getElementById('room-name').textContent = roomType;
+      document.getElementById('room-image').src = roomImage;
+      document.getElementById('room-image').alt = roomType;
+      
+      // Configurar métodos de pago
       const paymentMethods = document.querySelectorAll('.payment-method');
       paymentMethods.forEach(method => {
-        method.addEventListener('click', function () {
+        method.addEventListener('click', function() {
           paymentMethods.forEach(m => m.classList.remove('active'));
           this.classList.add('active');
         });
       });
-
-     
-      document.getElementById('checkout-form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        alert('¡Reserva completada con éxito! Gracias por elegir Horizon Prime Hotel.');
-      });
+      
+      // Actualizar precios iniciales
+      updatePrices();
     }
-    
-    document.addEventListener('DOMContentLoaded', initPage);
   </script>
 </body>
 
